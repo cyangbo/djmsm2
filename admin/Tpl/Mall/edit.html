@@ -1,0 +1,125 @@
+<include file="Public:header" />
+<div class="main">
+    <div class="box_tit">
+        <h2>修改商家</h2>
+    </div>
+    <div class="form_list">
+        <form method='post' id="form1" name="form1" action="{:U('Mall/update')}"  enctype="multipart/form-data">
+        <div class="listtop">
+        <dl>
+            <dt> 选择分组：</dt>
+            <dd>
+                <select name="catid">
+                    <volist name="grouplist" id="vo1">
+                        <if condition="$vo1['id'] eq $vo['catid']">
+                            <option value="{$vo1['id']}" selected="selected">{$vo1['groupname']}</option>
+                        <else />
+                        <option value="{$vo1['id']}">{$vo1['groupname']}</option>
+                        </if>
+                    </volist>
+                </select>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 商家名称：</dt>
+            <dd>
+                <input type="text" class="ipt6" name="mallname" value="{$vo.mallname}"><span class="red">*</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 缩略图：</dt>
+            <dd>
+                <notempty name="vo.thumb">
+                <input type="hidden" name="thumb" value="{$vo.thumb}">
+                <img src="__ROOT__/Uploads/{$vo.thumb}" name="thumb" width="60" height="60" />
+                <a href="javascript:void(0);" onclick="foreverdelthumb(this); return false;" title="你确定要文件吗？">删除文件</a>
+                
+                <else/>
+                <input type="file" class="thumb" name="thumb" />
+                </notempty>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 商家网址：</dt>
+            <dd>
+                <input type="text" class="ipt8" name="mallurl" value="{$vo.mallurl}"><span class="red">*</span><span class="huise">输入链接地址</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 推广链接：</dt>
+            <dd>
+                <input type="text" class="ipt8" name="buyurl" value="{$vo.buyurl}"><span class="huise">输入链接地址</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 排序值：</dt>
+            <dd>
+                <input type="text" class="ipt1" name="listorder" value="{$vo.listorder}" />
+            </dd>
+        </dl>
+        <dl>
+            <dt> 状态：</dt>
+            <dd>
+                <select name="status">
+                    <option value="1" <eq name="vo.status" value="1">selected="selected"</eq>>启用</option>
+                    <option value="0" <eq name="vo.status" value="0">selected="selected"</eq>>禁用</option>
+                </select>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 标题：</dt>
+            <dd>
+                <input type="text" class="ipt6" name="title" value="{$vo.title}"><span class="fontcolor">网页title标签设置。不填写，则默认为商家名称</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 关键字：</dt>
+            <dd>
+                <input type="text" class="ipt5" name="keyword" value="{$vo.keyword}"><span class="fontcolor">网页meta标签keywords关键词设置,利于搜索</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 摘要：</dt>
+            <dd>
+                <textarea name="description" id="description">{$vo.description}</textarea><span class="fontcolor">网页meta标签description描述设置</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 商家介绍：</dt>
+        </dl>
+        </div>
+        <div class="listbottom">
+
+                <textarea name="content" id="myEditor">{$vo.content}</textarea>
+                <script type="text/javascript">
+                    var editor = new UE.ui.Editor();
+                    editor.render("myEditor");
+                    //1.2.4以后可以使用一下代码实例化编辑器
+                    //UE.getEditor('myEditor')
+                </script>
+         </div>
+
+        <div class="form_b">
+            <input type="hidden" name="id" value="{$vo.id}">
+            <input type="submit" class="submit btn7" id="submit" value="提 交">
+        </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    function foreverdelthumb(cur){
+        //创建删除节点
+        $('.form_b').append($(cur).prev().prev().attr('name','thumbdel'));
+        
+        
+            //插入新节点
+            var html='<dd>\r\n<input type="file" class="thumb" name="thumb" />\r\n</dd>';
+            $(cur).parent().after(html);
+
+            //移除当前节点
+            $(cur).parent().remove();
+  
+        
+    }
+</script>
+<include file="Public:footer" />

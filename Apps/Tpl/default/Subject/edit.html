@@ -1,0 +1,99 @@
+<include file='Public:header' />
+<script type="text/javascript">
+    $(function(){
+        $('#form1').ajaxForm({
+            beforeSubmit:  checkFormcomment, 
+            success:completecomment, 
+            dataType: 'json'
+        });
+        function checkFormcomment(){
+            if( '' == $.trim($('#title').val())){
+                alert('标题不能为空');
+                return false;
+            }
+            if( '' == $.trim($('#content').val())){
+                alert('内容不能为空');
+                return false;
+            }
+        }
+        function completecomment(data){
+            if (data.status===1){
+                alert('提交成功'+data.info+'！');
+                window.location.href=""+data.data+"";
+            }else{
+                if(data.info==='未登录'){
+		    showBg();
+		}else if(data.info==='验证码错误'){
+		    alert('验证码错误！');
+		}else{
+		    alert('发表失败，'+data.data+'请重试！');
+		}
+            }
+        }
+
+        
+    });
+</script>
+<div id="main">
+    <include file='Public:login' />
+    
+    <div class="subject_pub">
+        <h2>发表主题</h2>
+        <form method='post' id="form1" name="form1" action="{:U('Subject/edit')}">
+            <table border="0" cellpadding="3" cellspacing="10">
+                <tr>
+                    <td>分类：</td>
+                    <td>
+                        <select name="catid">
+                            <volist name="list" id="cvo">
+                                <if condition="$cvo['id'] eq $data['catid']">
+                                    <option value="{$cvo['id']}" selected="selected">{$cvo['catname']}</option>
+                                    <else />
+                                    <option value="{$cvo['id']}">{$cvo['catname']}</option>
+                                </if>
+                            </volist>
+                        </select>
+                    </td>
+                </tr>
+                <tr>
+                    <td>标题：</td>
+                    <td><input type="text" name="title" id="title" class="ipt8" value="{$data.title}"></td>
+                </tr>
+                <tr>
+                    <td>内容：</td>
+                    <td><textarea name="content" id="content">{$data.content}</textarea></td>
+                </tr>
+                <tr>
+                    <td>验证码：</td>
+                    <td>
+                        <script type='text/javascript'>
+                            var YXM_PUBLIC_KEY = '{$YXM_PUBLIC_KEY}';
+                            var YXM_localsec_url = '{$YXM_localsec_url}';
+                            function YXM_local_check()
+                            {
+                                if(typeof(YinXiangMaDataString)!='undefined')return;
+                                YXM_oldtag = document.getElementById('YXM_script');
+                                var YXM_local=document.createElement('script');
+                                YXM_local.setAttribute("type","text/javascript");
+                                YXM_local.setAttribute("id","YXM_script");
+                                YXM_local.setAttribute("src",YXM_localsec_url+'yinxiangma.js?pk='+YXM_PUBLIC_KEY+'&v=YinXiangMa_PHPSDK_4.0');
+                                YXM_oldtag.parentNode.replaceChild(YXM_local,YXM_oldtag);  
+                            }
+                            setTimeout("YXM_local_check()",3000);
+                            document.write("<input type='hidden' id='YXM_here' /><script type='text/javascript' charset='gbk' id='YXM_script' src='http://api.yinxiangma.com/api3/yzm.yinxiangma.php?pk="+YXM_PUBLIC_KEY+"&v=YinXiangMaPHPSDK_4.0'><"+"/script>");
+                        </script>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <input type="hidden" name="id" value="{$data.id}">
+                        <input type="submit" id="submit" value="发 表" class="submit">
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+
+<include file='Public:footer' />

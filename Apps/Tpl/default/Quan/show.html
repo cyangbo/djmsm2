@@ -1,0 +1,69 @@
+<include file='Public:header' />
+<div id="main">
+    <div class="product_box">
+        <div class="product_box_lt">
+            <div class="info">
+                <div class='title' title="{$data.title}">{$data.title|msubstr=0,25}</div>
+                <table cellpadding="3" cellspacing="8">
+                    <tr>
+                        <td rowspan="3" width="100"><img src="__ROOT__/Uploads{$data.mallid|getMallLogo}" width="80" height="40" /></td>
+                        <td width="180">优惠说明：{$data.quanprice}</td>
+                        <td width="100"></td>
+                    </tr>
+                    <tr>
+                        <td>剩余数量：{$data['countnum']-$data['salenum']}</td>
+                        <td rowspan="2"><a href="{$data.buyurl}" class="ljlq" target="_blank">立即领取</a></td>
+                    </tr>
+                    <tr>
+                        <td>结束时间：{$data.endtime|toDate="Y-m-d H:i"}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="content">
+                <h3>详细说明</h3>
+                {$data.content}
+            </div>
+            <div class="recommend">
+                <h3>相关优惠券</h3>
+
+                <yufu:quan catid="62" order="rand()" num="6">
+                    <div class="cols">
+                        <a href="{:U('Quan/show',array('id'=>$quan['id']))}" target="_blank" title="{$quan.title}">
+
+                            <div class="cols_fl">
+                                <div class='quanprice'>
+                                    {$quan.quanprice}
+                                </div>
+                                <div class='malllogo'>
+                                    <img src="__ROOT__/Uploads{$quan.mallid|getMallLogo}" width="80" height="40" />
+                                </div>
+                            </div>
+                            <div class="cols_fr">
+                                <div class="buybutton">去抢购</div>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="cols_m">总共：{$quan.countnum}张<span>{$quan.title|msubstr=0,15}</span></div>
+                        </a>
+                    </div>
+                </yufu:quan>
+
+            </div>
+
+
+        </div>
+        <div class="product_box_rt">
+            <div class="product_recommend">
+                <h3>最新推荐</h3>
+                <ul>
+                    <yufu:quan catid="62" order="create_time desc" num="10">
+                    <li><a href="{:U('Quan/show',array('id'=>$quan['id']))}" target="_blank">{$quan.title|msubstr=0,20}</a></li>
+                    </yufu:quan>
+                </ul>
+            </div>
+            <div class="product_recommend">
+                <yufu:advert settag="quan_detail_right" />
+            </div>
+        </div>
+    </div>
+</div>
+<include file='Public:footer' />

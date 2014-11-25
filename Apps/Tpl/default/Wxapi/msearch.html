@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no">
+        
+        <style type="text/css">
+            body{
+                margin: 0;
+                padding: 0;
+                font-size: 12px;
+            }
+            *{
+                margin: 0;
+                padding: 0;
+            }
+            .main{
+                
+                margin: 20px 10px;
+                
+            }
+            .hd{
+                font-weight: bold;
+                padding-left: 20px;
+            }
+            .list{
+                margin-top: 10px;
+                border-radius: 5px; 
+                background: #F2F2F2;
+            }
+            ul{
+                float: left;
+                list-style: none;
+                margin: 0;
+                padding: 10px;
+            }
+            ul li{
+                
+                margin:0 5px 10px;
+            }
+            ul li .logo img{
+                border-radius: 5px;
+            }
+            ul li .title{
+                font-size: 14px;
+            }
+            a{
+                text-decoration: none;
+                color: #999;
+                text-align: center;
+                font-size: 12px;
+            }
+            .clear{
+                clear: both;
+            }
+            .page{
+                float: left;
+                padding-bottom: 10px;
+                font-size: 14px;
+                font-weight: bold;
+            }
+            .page .prev{
+                float: left;
+                width: 120px;
+                text-align: center;
+            }
+            .page .next{
+                float: right;
+                width: 120px;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="main">
+            <div class="hd">
+                <empty name="keyword">抱歉，未搜索到相关商品！为您推荐<else />关于“{$keyword}”的相关商品</empty>
+            </div>
+            <div class="list">
+                <ul>
+                    <volist name="list" id="vo">
+                    <li>
+                        <a href="<empty name="vo.buyurl">{$vo.sourceurl}<else />{$vo.buyurl}</empty>" target="_blank">
+                        <div class="logo">
+                            <?php $vo["thumb"]=explode("#", $vo["thumb"]); ?>
+                            <img src="__ROOT__/Uploads{$vo['thumb'][0]|str_replace='.jpg','_300x300.jpg',###}" width="260" height="260" />
+                        </div>
+                        <div class="title">{$vo.title}</div>
+                        </a>
+                    </li>
+                    </volist>
+                </ul>
+                <div class="clear"></div>
+                <div class="page">{$page}</div>
+                <div class="clear"></div>
+            </div>
+        </div>
+    </body>
+</html>

@@ -1,0 +1,1 @@
+<?php	return array ( 0 => 'id', 1 => 'create_url', 2 => 'create_num', '_autoinc' => true, '_pk' => 'id', '_type' => array ( 'id' => 'int(11)', 'create_url' => 'varchar(255)', 'create_num' => 'int(11)', ), );?>

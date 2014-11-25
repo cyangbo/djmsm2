@@ -1,0 +1,11 @@
+<include file="Public:top" />
+    <include file="Public:header" />
+    <div data-role="content">
+        <h3>{$data.title}</h3>
+        价格：￥{$data.price}<br>
+        浏览次数：{$data.hits}<br>
+        发布时间：{$data.create_time|toDate='Y-m-d'}<br>
+        <notempty name="prevdata"><div>上一个：<a href="{:U('Article/show',array('id'=>$prevdata['id']))}" target="_blank">{$prevdata['title']|msubstr=0,20}</a></div></notempty>
+        <notempty name="nextdata"><div>下一个：<a href="{:U('Article/show',array('id'=>$nextdata['id']))}" target="_blank">{$nextdata['title']|msubstr=0,20}</a></div></notempty>
+    </div> 
+<include file="Public:bottom" />

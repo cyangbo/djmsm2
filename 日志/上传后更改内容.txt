@@ -1,0 +1,68 @@
+将首页导航到:双11产品类目
+<?php header("location: hhttp://www.djmsm.com/index.php?m=tuan&a=index&id=53"); ?>
+
+将9.9元包邮栏目
+改成:双11产品
+
+双11产品
+改成:9.9元包邮
+
+得到
+双11	tuan
+9.9元product
+活动product
+
+tuan页面,月销量改成:双11价
+
+首页页面导向tuan页面的双11
+
+更改tuan页面的banner广告图
+更改product的广告图:变成活动
+
+
+
+tuan页面的双11,子类目改成Excel的分类
+
+得到各个分类的id,替换Excel品类
+
+将Excel变成数据库语句
+catid=上面之类id
+主图?
+
+推荐理由可以是title里面用一个keyword?
+
+
+
+数据库操作完成后,试一下,双11爆款的,月销量随机数  改成 市场价
+
+excel处理	
+http://test01.com/excel/PHPExcel/one.php   实现功能
+数据目录:one
+目标目录:two
+
+
+1.读取目录所有文件
+2.文件是处理在一行中读取内容,赋值到字符串中,然后循环得到文件所有内容到字符串,编程数据库语句
+3.输出到另外文件夹的文件
+http://localhost/test/lb/file/taot.php
+
+one.php
+
+几个read文件可以读出excel内容,输出到数据库里面:
+结合上面taot.php实现功能:
+1.遍历目录
+2.生成sql语句
+3.生成文件或者直接输入数据库
+http://test01.com/excel/PHPExcel/read2.php
+
+excel得到内容:
+类目catid	商品名称	双11价格,市场价  购买链接	推荐理由:保存在keyword中
+折扣力度:市场价不要了??
+输入到数据库
+少了:商品在淘宝的id	时间	  下架时间	图片
+
+在数据库中读取:商品id,购买链接--手动得到商品链接--一个个保存
+处理得到:图片地址,商品在淘宝的id
+update数据库商品,按照商品id
+
+

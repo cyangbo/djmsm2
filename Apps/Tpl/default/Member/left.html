@@ -1,0 +1,8 @@
+<div class="member_nav">会员中心</div>
+<ul class="member_list">
+    <li><a href="{:U('Member/index')}">个人中心</a></li>
+    <li><a href="{:U('Member/information')}">修改资料</a></li>
+    <li><a href="{:U('Member/password')}">修改密码</a></li>
+    <li><a href="{:U('Member/space',array('u'=>$_SESSION['account']))}">我的空间</a></li>
+    <li><a href="{:U('Member/logout')}">退出</a></li>
+</ul>

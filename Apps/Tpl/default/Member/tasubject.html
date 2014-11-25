@@ -1,0 +1,32 @@
+<include file='Public:header' />
+<script type="text/javascript" src="../Public/js/jquery.masonry.min.js"></script>
+    <div id="main">
+        <include file='Member:header' />
+        <div class="clear"></div>
+        <div class="space_m">
+            <div class="space_fl">
+                <div class="block_c">
+                    <div class="block_h">Ta的主题<span><a href="{:U('Subject/add')}" class="pub">发表主题</a></span></div>
+                    <div class="block_m">
+                        <ul class="v_list">
+                            <volist name="list" id="vo">
+                                <li>
+                                    <span class="category">[<a href="{:U('Subject/index',array('id'=>$vo['catid']))}">{$vo.catid|getCategoryName}</a>]</span>
+                                    <span class="title"><a href="{:U('Subject/show',array('id'=>$vo['id']))}">{$vo.title}</a></span>
+                                    <span class="time">{$vo.create_time|toDate='m月d日 H:i'}</span>
+                                </li>
+                            </volist>
+                        </ul>
+                   </div>
+                   <div class="block_b">
+                        <div class="page">{$page}</div>
+                   </div>
+               </div>
+            </div>
+            <div class="space_fr">
+                <include file="Member:right" />
+            </div>
+        </div>
+    </div>
+
+<include file='Public:footer' />

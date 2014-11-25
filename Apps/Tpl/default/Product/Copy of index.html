@@ -1,0 +1,159 @@
+<include file='Public:header' />
+<script type="text/javascript" src="../Public/js/jquery.masonry.min.js"></script>
+    <div id="main">
+        <include file='Public:login' />
+        
+        <!-- 
+         <div class="ad_position_id">
+            <yufu:advert settag="product_list_top" />
+        </div>
+        
+         -->
+       
+        <!-- 标签分类 -->
+        <div class="category">
+            <ul>
+                <volist name="categorylist" id="category1">
+                    <if condition="$category1['id'] eq $position[0]['id']">
+                    <volist name="category1.pid" id="category2">
+                    
+                    <li>
+                        <span><a href="{:U('Product/index',array('id'=>$category2['id']))}" title="{$category2['catname']}" >{$category2['catname']}</a></span>
+                        <!-- 细分分类
+                        <volist name="category2.pid" id="category3">
+                            <a href="{:U('Product/index',array('id'=>$category3['id']))}" title="{$category3['catname']}" >{$category3['catname']}</a>
+                        </volist>
+                         -->    
+                    </li>
+                    
+                    </volist>
+                    </if>
+                </volist>
+            </ul>
+        </div>
+        
+        <div class="sort">
+        	<!-- 面包屑 -->
+            <div class="position">
+            <volist name="position" id="vo">
+                <if condition="$key gt 0">
+                     &gt; 
+                </if>
+                <a href="{:U('Product/index',array('id'=>$vo['id']))}">{$vo.catname}</a>
+            </volist>
+            </div>
+            
+            
+            <div class="sortlist">
+            	<!-- 排序:最新,最热 -->
+				<div class="fl">
+                    <span>排序:</span>  
+                    <a href="{:U('Product/index',array('id'=>$vo['id'],'sort'=>'pop','price'=>$price))}" hidefocus="true"><span <eq name="sort" value="pop">class="cur"</eq>>潮流</span></a>
+                    <a href="{:U('Product/index',array('id'=>$vo['id'],'sort'=>'news','price'=>$price))}" hidefocus="true"><span <eq name="sort" value="news">class="cur"</eq>>最新</span></a>
+                    <a href="{:U('Product/index',array('id'=>$vo['id'],'sort'=>'hot','price'=>$price))}" hidefocus="true"><span <eq name="sort" value="hot">class="cur"</eq>>最热</span></a>
+				</div>
+				<!-- 排序,按照价格
+				<div class="fl" style="margin-left: 20px;">
+                    <span>价格:</span>  
+                    <a title="全部" href="{:U('Product/index',array('id'=>$vo['id'],'sort'=>$sort,'price'=>'all'))}" hidefocus="true"><span <eq name="price" value="all">class="cur"</eq>>全部</span></a>
+                    <a title="100元以下" href="{:U('Product/index',array('id'=>$vo['id'],'sort'=>$sort,'price'=>',100'))}" hidefocus="true"><span <eq name="price" value=",100">class="cur"</eq>>100</span></a>
+                    <a rel="nofollow" title="101-200元" href="{:U('Product/index',array('id'=>$vo['id'],'sort'=>$sort,'price'=>'101,200'))}" hidefocus="true"><span <eq name="price" value="101,200">class="cur"</eq>>200</span></a>
+                    <a rel="nofollow" title="201-500元" href="{:U('Product/index',array('id'=>$vo['id'],'sort'=>$sort,'price'=>'201,500'))}" hidefocus="true"><span <eq name="price" value="201,500">class="cur"</eq>>500</span></a>
+                    <a rel="nofollow" title="500元以上" href="{:U('Product/index',array('id'=>$vo['id'],'sort'=>$sort,'price'=>'500,'))}" hidefocus="true"><span <eq name="price" value="500,">class="cur"</eq>>更高</span></a> 
+				</div>
+				 -->
+            </div>    
+		</div>
+        
+        
+        <!-- 商品循环结束 -->
+        <div id="container" class="container">
+            <volist name="list" id="vo">
+                <div class="item">
+                    <div class="thumb">
+                    	<a href="{:U('Product/show',array('id'=>$vo['id']))}" target="_blank">
+                    		<img src="__ROOT__/Uploads{$vo['thumb'][0]|str_replace='.jpg','_300x300.jpg',###}" width="211" height="211"/>
+                    	</a>
+                    	<span class="p">￥<eq name="vo.hdprice" vlaue="0.00">{$vo.price|round=###,2}<else />{$vo.hdprice|round=###,2}</eq></span>
+                    </div>
+                    
+                    <div class="info">
+                        <span class="xhbg">
+                        	<a href="javascript:return false;" class='xh' onclick="xh(this,{$vo['id']})">&nbsp;&nbsp;<strong>{$vo.xihuan}</strong></a>
+                        </span> 
+                        <span class="msale">月销量<strong>{$vo.monthsale}</strong>件</span>
+                    </div>
+                    
+                    <div class='title'>
+                        <a href="{:U('Product/show',array('id'=>$vo['id']))}" target="_blank">{$vo.title} </a>
+                    </div>
+                    
+                    <div class="service">
+                        <eq name="vo.baoyou" value="1"><span title="包邮">邮</span></eq>
+                        <eq name="vo.asfh" value="1"><span title="按时发货">发</span></eq>
+                        <eq name="vo.jstk" value="1"><span title="极速退款">极</span></eq>
+                        <eq name="vo.thbzk" value="1"><span title="退货保障卡">保</span></eq>
+                        <eq name="vo.smth" value="1"><span title="上门退货">退</span></eq>
+                        <eq name="vo.qtth" value="1"><span title="七天退换">退</span></eq>
+                        <eq name="vo.jfbgwdx" value="1"><span title="集分宝购物抵现">集</span></eq>
+                        <eq name="vo.yfx" value="1"><span title="运费险">运</span></eq>
+                    </div>
+                    
+                    <?php $commentlist=getCommentInfo($vo["id"],Product,1); ?>
+                    
+                    <notempty name="commentlist">
+	                    <div class='comment'>
+	                        <volist name="commentlist" id="ct">
+	                            <a href="{:U('Member/space',array('u'=>$ct['membername']))}" target="_blank"><img src="Uploads/{$ct.memberid|getMemberLogo}"></a>
+	                            <a href="{:U('Member/space',array('u'=>$ct['membername']))}" target="_blank" class="membername">{$ct.membername}</a>
+	                            <span>{$ct.content|strip_tags}</span>
+	                        </volist>
+	                    </div>
+                    </notempty>
+                </div>
+            </volist>
+        </div>
+        <!-- 商品循环结束 -->
+        
+        <div class="page">{$page}</div>
+        
+        
+</div>
+    
+    
+<script type="text/javascript">
+$(function(){
+    //执行瀑布流
+    var $container = $('#container');
+        $container.masonry({
+          itemSelector : '.item',
+          isAnimated: true
+        });
+        //加关注
+        $('.addfollow').click(function(){
+           var followname=$(this).attr('name'); 
+           $.get("{:U('Product/addfollow',array('u'=>'"+followname+"'))}",function(data){
+               if (data.status===1){
+                    alert('关注成功！');
+                }else{
+                    if(data.info==='未登录'){
+                        showBg();
+                    }else if(data.info==='已关注'){
+                        alert('已关注过啦！');
+                    }else if(data.info==='自己'){
+                        alert('自己都不认识啦！');
+                    }else{
+                        alert('关注成功，'+data.data+'请重试！');
+                    }
+                }
+           });
+        });
+});
+function xh(cur,id){
+
+    $.get("{:U('Product/xh')}",{id:id},function(data){
+        $(cur).children('strong').html(data);
+   }) ;
+}
+</script>
+<include file='Public:footer' />

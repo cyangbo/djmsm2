@@ -1,0 +1,112 @@
+<include file='Public:header' />
+<script type="text/javascript" src="../Public/js/jquery.masonry.min.js"></script>
+    <div id="main">
+        <include file='Member:header' />
+        <div class="clear"></div>
+        <div class="space_m">
+            <div class="space_fl">
+                <div class="space">
+                    <h3>Ta评论过的<span><a href="{:U('Member/tacomment',array('u'=>$u))}" target="_blank">更多&gt;&gt;</a></span></h3>
+                    <div class="container">
+                        <volist name="commentlist" id="vo" offset="0"  length="6">
+                            <div class="item">
+
+                                <div class="thumb">
+                                    <a href="{:U('Product/show',array('id'=>$vo['id']))}" target="_blank">
+                                    <img src="__ROOT__/Uploads{$vo['thumb'][0]|str_replace='.jpg','_300x300.jpg',###}" width="211" height="211"/>
+                                    </a>
+                                    <span class="p">￥<eq name="vo.hdprice" vlaue="0.00">{$vo.price|round=###,2}<else />{$vo.hdprice|round=###,2}</eq></span>
+                                    </div>
+                                    <div class="info">
+                                        <span class="xhbg"><a href="javascript:return false;" class='xh' onclick="xh(this,{$vo['id']})">&nbsp;&nbsp;<strong>{$vo.xihuan}</strong></a></span> <span class="msale">月销量<strong>{$vo.monthsale}</strong>件</span>
+                                    </div>
+                                    <div class='title'>
+                                        <a href="{:U('Product/show',array('id'=>$vo['id']))}" target="_blank">{$vo.title} </a>
+                                    </div>
+                                    <div class="service">
+                                        <eq name="vo.baoyou" value="1"><span title="包邮">邮</span></eq><eq name="vo.asfh" value="1"><span title="按时发货">发</span></eq><eq name="vo.jstk" value="1"><span title="极速退款">极</span></eq><eq name="vo.thbzk" value="1"><span title="退货保障卡">保</span></eq><eq name="vo.smth" value="1"><span title="上门退货">退</span></eq><eq name="vo.qtth" value="1"><span title="七天退换">退</span></eq><eq name="vo.jfbgwdx" value="1"><span title="集分宝购物抵现">集</span></eq><eq name="vo.yfx" value="1"><span title="运费险">运</span></eq>
+                                    </div>
+                                    <?php $commentlist=getCommentInfo($vo["id"],Product,1); ?>
+                                    <notempty name="commentlist">
+                                    <div class='comment'>
+                                        <volist name="commentlist" id="ct">
+                                                <a href="{:U('Member/space',array('u'=>$ct['membername']))}" target="_blank"><img src="Uploads/{$ct.memberid|getMemberLogo}"></a>
+                                                <a href="{:U('Member/space',array('u'=>$ct['membername']))}" target="_blank" class="membername">{$ct.membername}</a>
+                                                <span>{$ct.content|strip_tags}</span>
+                                        </volist>
+                                    </div>
+                                    </notempty>
+                                
+                                
+                                
+                                
+                                
+
+                            </div>
+                        </volist>
+                    </div> 
+                </div>
+                <div class="space">
+                    <h3>Ta收藏过的<span><a href="{:U('Member/tacollect',array('u'=>$u))}" target="_blank">更多&gt;&gt;</a></span></h3>
+                    <div class="container">
+                        <volist name="collectlist" id="vo" offset="0"  length="6">
+                            <div class="item">
+                                
+                                <div class="thumb">
+                                <a href="{:U('Product/show',array('id'=>$vo['id']))}" target="_blank">
+                                <img src="__ROOT__/Uploads{$vo['thumb'][0]|str_replace='.jpg','_300x300.jpg',###}" width="211" height="211"/>
+                                </a>
+                                <span class="p">￥<eq name="vo.hdprice" vlaue="0.00">{$vo.price|round=###,2}<else />{$vo.hdprice|round=###,2}</eq></span>
+                                </div>
+                                <div class="info">
+                                    <span class="xhbg"><a href="javascript:return false;" class='xh' onclick="xh(this,{$vo['id']})">&nbsp;&nbsp;<strong>{$vo.xihuan}</strong></a></span> <span class="msale">月销量<strong>{$vo.monthsale}</strong>件</span>
+                                </div>
+                                <div class='title'>
+                                    <a href="{:U('Product/show',array('id'=>$vo['id']))}" target="_blank">{$vo.title} </a>
+                                </div>
+                                <div class="service">
+                                    <eq name="vo.baoyou" value="1"><span title="包邮">邮</span></eq><eq name="vo.asfh" value="1"><span title="按时发货">发</span></eq><eq name="vo.jstk" value="1"><span title="极速退款">极</span></eq><eq name="vo.thbzk" value="1"><span title="退货保障卡">保</span></eq><eq name="vo.smth" value="1"><span title="上门退货">退</span></eq><eq name="vo.qtth" value="1"><span title="七天退换">退</span></eq><eq name="vo.jfbgwdx" value="1"><span title="集分宝购物抵现">集</span></eq><eq name="vo.yfx" value="1"><span title="运费险">运</span></eq>
+                                </div>
+                                <?php $commentlist=getCommentInfo($vo["id"],Product,1); ?>
+                                <notempty name="commentlist">
+                                <div class='comment'>
+                                    <volist name="commentlist" id="ct">
+                                            <a href="{:U('Member/space',array('u'=>$ct['membername']))}" target="_blank"><img src="Uploads/{$ct.memberid|getMemberLogo}"></a>
+                                            <a href="{:U('Member/space',array('u'=>$ct['membername']))}" target="_blank" class="membername">{$ct.membername}</a>
+                                            <span>{$ct.content|strip_tags}</span>
+                                    </volist>
+                                </div>
+                                </notempty>
+                                
+                                
+                                
+
+                            </div>
+                        </volist>
+                    </div> 
+                </div>
+            </div>
+            <div class="space_fr">
+                <include file="Member:right" />
+            </div>
+        </div>
+        
+    </div>
+<script type="text/javascript">
+$(function(){
+    //执行瀑布流
+    var $container = $('.container');
+        $container.masonry({
+          itemSelector : '.item',
+          isAnimated: true
+        });
+});
+
+function xh(cur,id){
+
+    $.get("{:U('Product/xh')}",{id:id},function(data){
+        $(cur).children('strong').html(data);
+   }) ;
+}
+</script>
+<include file='Public:footer' />

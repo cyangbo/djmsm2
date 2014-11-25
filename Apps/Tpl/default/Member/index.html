@@ -1,0 +1,37 @@
+<include file="Public:header" />
+    <div class="memberbox">
+         <div class="memberbox_inner">
+            <div class="memberbox_left">
+                <include file="Member:left" />
+            </div>
+            <div class="memberbox_main">
+               <div class="member_nav">个人中心</div>
+               <table border="0" cellspacing="6" cellpadding="3">
+                    <tbody>
+                        <tr>
+                            <th>头像：</th>
+                            <td><img src="__ROOT__/Uploads{$data.thumb}" width="80" height="80" /></td>
+                        </tr>
+                        <tr>
+                            <th>用户名：</th>
+                            <td>{$data.account}</td>
+                        </tr>
+                        <tr>
+                            <th>昵称：</th>
+                            <td>{$data.nickname}</td>
+                        </tr>
+                        <tr>
+                            <th>电子邮箱：</th>
+                            <td>{$data.email}</td>
+                        </tr>
+                        <tr>
+                            <th>个性签名：</th>
+                            <td>{$data.sign}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+         </div>
+    </div>
+<div class="clear10"></div>
+<include file="Public:footer" />

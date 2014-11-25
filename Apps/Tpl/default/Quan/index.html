@@ -1,0 +1,47 @@
+<include file='Public:header' />
+<script type="text/javascript" src="../Public/js/jquery.masonry.min.js"></script>
+    <div id="main">
+        <div class="ad_position_id" style="padding-left: 5px;">
+            <yufu:advert settag="quan_list_top" />
+        </div>
+        <div class="mallcategory">
+            <span>筛选：</span>
+            <a href="{:U('Quan/index',array('id'=>$position[0]['id']))}" <empty name="mallid">class="cur"</empty>>所有</a>
+            <volist name="malllist" id="mall">
+                <a href="{:U('Quan/index',array('id'=>$position[0]['id'],'mallid'=>$mall['id']))}" title="{$mall['mallname']}" <eq name="mallid" value="$mall['id']">class="cur"</eq>>{$mall['mallname']}</a>
+            </volist>
+        </div>
+        <div id="container" class="container">
+            <volist name="list" id="vo">
+                <div class="cols">
+                    <a href="{:U('Quan/show',array('id'=>$vo['id']))}" target="_blank" title="{$vo.title}">
+                        <div class="cols_fl">
+                            <div class='quanprice'>
+                                {$vo.quanprice}
+                            </div>
+                            <div class='malllogo'>
+                                <img src="__ROOT__/Uploads{$vo.mallid|getMallLogo}" width="80" height="40" />
+                            </div>
+                        </div>
+                        <div class="cols_fr">
+                            <div class="buybutton">去抢购</div>
+                        </div>
+                        <div class="clear"></div>
+                        <div class="cols_m">总共：{$vo.countnum}张<span>{$vo.title|msubstr=0,15}</span></div>
+                    </a>
+                </div>
+            </volist>
+        </div>
+        <div class="page">{$page}</div>
+    </div>
+<script type="text/javascript">
+$(function(){
+    //执行瀑布流
+    var $container = $('#container');
+    $container.masonry({
+      itemSelector : '.cols',
+      isAnimated: true
+    });
+});
+</script>
+<include file='Public:footer' />

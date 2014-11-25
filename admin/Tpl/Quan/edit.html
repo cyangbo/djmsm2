@@ -1,0 +1,181 @@
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/js/calendar/jscal2.css"/>
+<link rel="stylesheet" type="text/css" href="../Public/js/calendar/border-radius.css"/>
+<link rel="stylesheet" type="text/css" href="../Public/js/calendar/win2k.css"/>
+<script type="text/javascript" src="../Public/js/calendar/calendar.js"></script>
+<script type="text/javascript" src="../Public/js/calendar/lang/en.js"></script>
+<div class="main">
+    <div class="box_tit">
+        <h2>修改优惠券</h2>
+    </div>
+    <div class="form_list">
+        <form method='post' id="form1" name="form1" action="{:U('Quan/update')}"  enctype="multipart/form-data">
+        <div class="listtop">
+        <dl>
+            <dt> 栏目：</dt>
+            <dd>
+                <label class="label">{$vo.catid|getCategoryName}</label><input type="hidden" name="catid" value="{$vo.catid}">
+            </dd>
+        </dl>
+        <dl>
+            <dt> 选择商家：</dt>
+            <dd>
+                <select name="mallid">
+                    <volist name="malllist" id="vo1">
+                        <if condition="$vo1['id'] eq $vo['mallid']">
+                            <option value="{$vo1['id']}" selected="selected">{$vo1['mallname']}</option>
+                        <else />
+                        <option value="{$vo1['id']}">{$vo1['mallname']}</option>
+                        </if>
+                    </volist>
+                </select>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 标题：</dt>
+            <dd>
+                <input type="text" class="ipt8" name="title" value="{$vo.title}"><span class="red">*</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>自定义title：</dt>
+            <dd>
+                <input type="text" class="ipt8" name="sitetitle" value="{$vo.sitetitle}"><span class="fontcolor">如果title为空，默认用标题作为title内容</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>keywords：</dt>
+            <dd>
+                <input type="text" class="ipt5" name="keywords" value="{$vo.keywords}"><span class="fontcolor">网页Meta标签的keywords关键词处显示,此处会显示在商品页的本商品页面!</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>description：</dt>
+            <dd>
+                <textarea name="description" class="fLeft">{$vo.description}</textarea><span class="fontcolor" style="float: left; width: 200px;">网页Meta标签的description处显示,此处会显示在商品页的本商品页面!</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 优惠说明：</dt>
+            <dd>
+                <input type="text" class="ipt6" name="quanprice" value="{$vo.quanprice}">
+            </dd>
+        </dl>
+        
+        <dl>
+            <dt> 总数量：</dt>
+            <dd>
+                <input type="text" class="ipt3" name="countnum" value="{$vo.countnum}">
+            </dd>
+        </dl>
+        <dl>
+            <dt> 领取数量：</dt>
+            <dd>
+                <input type="text" class="ipt3" name="salenum" value="{$vo.salenum}">
+            </dd>
+        </dl>
+        <dl>
+            <dt> 开始时间：</dt>
+            <dd>
+                
+                <input type="text" class="ipt4" name="starttime" id="starttime" value="{$vo.starttime|toDate='Y-m-d H:i:s'}">
+                <script type="text/javascript">
+                    Calendar.setup({
+                        weekNumbers: true,
+                        inputField : "starttime",
+                        trigger    : "starttime",
+                        dateFormat: "%Y-%m-%d %H:%M:%S",
+                        showTime: true,
+                        minuteStep: 1,
+                        onSelect   : function() {this.hide();}
+                    });
+                </script>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 结束时间：</dt>
+            <dd>
+                <input type="text" class="ipt4" name="endtime" id="endtime" value="{$vo.endtime|toDate='Y-m-d H:i:s'}">
+                <script type="text/javascript">
+                    Calendar.setup({
+                        weekNumbers: true,
+                        inputField : "endtime",
+                        trigger    : "endtime",
+                        dateFormat: "%Y-%m-%d %H:%M:%S",
+                        showTime: true,
+                        minuteStep: 1,
+                        onSelect   : function() {this.hide();}
+                    });
+
+                </script>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 排序值：</dt>
+            <dd>
+                <input type="text" class="ipt1" name="listorder" value="{$vo.listorder}" />
+            </dd>
+        </dl>
+        <dl>
+            <dt> 状态：</dt>
+            <dd>
+                <select name="status">
+                    <option value="1" <eq name="vo.status" value="1">selected="selected"</eq>>启用</option>
+                    <option value="0" <eq name="vo.status" value="0">selected="selected"</eq>>禁用</option>
+                </select>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 优惠券链接：</dt>
+            <dd>
+                <input type="text" class="ipt8" name="buyurl" value="{$vo.buyurl}"><span class="red">*</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 缩略图：</dt>
+            <dd>
+                
+                <notempty name="vo.thumb">
+                <img src="__ROOT__/Uploads/{$vo.thumb}" name="thumb" width="60" height="60" />
+                <a href="javascript:return false;" onclick="foreverdelthumb(this);" title="你确定要删除缩略图吗？">删除缩略图</a>
+                <else/>
+                <input type="file" class="thumb" name="thumb" />
+                </notempty>
+            </dd>
+        </dl>
+        <div style='font-size: 14px; padding-top: 15px; color: #666;'>详细介绍：</div>   
+        </div>
+        <div class="listbottom">
+
+                <textarea name="content" id="myEditor">{$vo.content}</textarea>
+                <script type="text/javascript">
+                    var editor = new UE.ui.Editor();
+                    editor.render("myEditor");
+                    //1.2.4以后可以使用一下代码实例化编辑器
+                    //UE.getEditor('myEditor')
+                </script>
+         </div>
+
+        <div class="form_b">
+            <input type="hidden" name="id" value="{$vo.id}">
+            <input type="submit" class="submit btn7" id="submit" value="提 交">
+        </div>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+   function foreverdelthumb(cur){
+        var nodename=$(cur).prev().attr('name');
+        var url="{:U('Quan/delfile',array('id'=>$vo['id'],'file'=>'"+nodename+"'))}";
+        //创建删除节点
+        $.get(url,function(){
+            //插入新节点
+            var html='<dd>\r\n<input type="file" class="thumb" name="'+nodename+'" />\r\n</dd>';
+            $(cur).parent().after(html);
+
+            //移除当前节点
+            $(cur).parent().remove();
+        });
+    }
+</script>
+<include file="Public:footer" />

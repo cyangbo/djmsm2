@@ -1,0 +1,132 @@
+<include file="Public:header" />
+<script language="JavaScript">
+    <!--
+    $(function(){
+
+        $('#form1').ajaxForm({
+            beforeSubmit:  checkForm, 
+            success:       complete, 
+            dataType: 'json'
+        });
+
+        function checkForm(){
+            if( '' == $.trim($('#account').val())){
+                alert('用户名不能为空');
+                return false;
+            }
+            if( '' == $.trim($('#password').val())){
+                alert('密码不能为空');
+                return false;
+            }
+            if( $.trim($('#repassword').val()) != $.trim($('#password').val())){
+                alert('密码与确认密码不一致');
+                return false;
+            }
+            if( '' == $.trim($('#email').val())){
+                alert('电子邮箱不能为空');
+                return false;
+            }
+            
+        }
+        function complete(data){
+            if (data.status==1){
+                alert('注册成功！');
+                window.location.href="{:U('Member/login')}";
+            }else{
+                alert(data.info);
+            }
+        }
+        
+        $("#account").blur(function(){
+            var account=$("#account").val();
+            $.post("{:U('Member/checkAccount')}",{account:account}, function(data){
+                   $("#accounterror").html(data['info']);
+            });
+        });
+        $("#password").blur(function(){
+            var password=$("#password").val();
+            if(password===""){
+                $("#passworderror").html("密码不能空！"); 
+            }else{
+                $("#passworderror").html("*"); 
+            }
+        });
+        $("#repassword").blur(function(){
+            var password=$("#password").val();
+            var repassword=$("#repassword").val();
+            if(repassword!=password){
+                $("#repassworderror").html("密码与确认密码不一致！"); 
+            }else{
+                $("#repassworderror").html("*"); 
+            }
+        });
+        $("#email").blur(function(){
+            var email=$("#email").val();
+            if(email==""){
+               $("#emailerror").html("电子邮箱不能空！"); 
+            }else{
+                $("#emailerror").html("*"); 
+            }
+        });
+        
+        
+    });
+    //-->
+</script>
+
+    <div class="memberbox">
+        
+        <div class="memberbox_register">
+            <h2>会员注册</h2>
+            <form method='post' id="form1" action="{:U('Member/checkRegister')}">
+                <table cellpadding="3" cellspacing="6" style="width: 530px; text-align: left;">
+                    <tr>
+                        <td width="60">用户名：</td>
+                        <td><input type="text" name="account" id="account" class="ipt4"><span id="accounterror" class="red">*</span></td>
+                    </tr>
+                    <tr>
+                        <td>密码：</td>
+                        <td><input type="password" name="password" id="password" class="ipt4"><span id="passworderror" class="red">*</span></td>
+                    </tr>
+                    <tr>
+                        <td>确认密码：</td>
+                        <td><input type="password" name="repassword" id="repassword" class="ipt4"><span id="repassworderror" class="red">*</span></td>
+                    </tr>
+                    <tr>
+                        <td>电子邮箱：</td>
+                        <td><input type="text" name="email" id="email" class="ipt4"><span id="emailerror" class="red">*</span></td>
+                    </tr>
+                    <tr>
+                        <td>验证码：</td>
+                        <td>
+                            <script type='text/javascript'>
+                                var YXM_PUBLIC_KEY = '{$YXM_PUBLIC_KEY}';
+                                var YXM_localsec_url = '{$YXM_localsec_url}';
+                                function YXM_local_check()
+                                {
+                                    if(typeof(YinXiangMaDataString)!='undefined')return;
+                                    YXM_oldtag = document.getElementById('YXM_script');
+                                    var YXM_local=document.createElement('script');
+                                    YXM_local.setAttribute("type","text/javascript");
+                                    YXM_local.setAttribute("id","YXM_script");
+                                    YXM_local.setAttribute("src",YXM_localsec_url+'yinxiangma.js?pk='+YXM_PUBLIC_KEY+'&v=YinXiangMa_PHPSDK_4.0');
+                                    YXM_oldtag.parentNode.replaceChild(YXM_local,YXM_oldtag);  
+                                }
+                                setTimeout("YXM_local_check()",3000);
+                                document.write("<input type='hidden' id='YXM_here' /><script type='text/javascript' charset='gbk' id='YXM_script' src='http://api.yinxiangma.com/api3/yzm.yinxiangma.php?pk="+YXM_PUBLIC_KEY+"&v=YinXiangMaPHPSDK_4.0'><"+"/script>");
+                            </script>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td>
+                            <input type="hidden" name="role_id" value="15" >
+                            <input type="submit" id="submit" value="注 册" class="small submit">
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+<div class="clear10"></div>
+<include file="Public:footer" />

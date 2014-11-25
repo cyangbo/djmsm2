@@ -1,0 +1,12 @@
+<include file="Public:top" />
+    <include file="Public:header" />
+        <div data-role="content">              
+            <h3>{$data.title}</h3>
+            剩余数量：{$data['countnum']-$data['salenum']}<br>
+            结束时间：{$data.endtime|toDate="Y-m-d H:i"}<br>
+            浏览次数：{$data.hits}<br>
+            详细说明：<br>{$data.content}
+            <notempty name="prevdata"><div>上一个：<a href="{:U('Quan/show',array('id'=>$prevdata['id']))}" target="_blank">{$prevdata['title']|msubstr=0,20}</a></div></notempty>
+            <notempty name="nextdata"><div>下一个：<a href="{:U('Quan/show',array('id'=>$nextdata['id']))}" target="_blank">{$nextdata['title']|msubstr=0,20}</a></div></notempty>
+        </div>
+<include file="Public:bottom" />

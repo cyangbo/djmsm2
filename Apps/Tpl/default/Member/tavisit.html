@@ -1,0 +1,38 @@
+<include file='Public:header' />
+<script type="text/javascript" src="../Public/js/jquery.masonry.min.js"></script>
+    <div id="main">
+        <include file='Member:header' />
+        <div class="clear"></div>
+        <div class="space_m">
+            <div class="space_fl">
+                <div class="block_c">
+                    <div class="block_h">Ta的访客</div>
+                    <div class="block_m">
+                        <ul class="h_list">
+                            <volist name="list" id="mv">
+                                <li>
+                                    <a href="{:U('Member/space',array('u'=>$mv['visitname']))}" target="_blank">
+                                    <div class="img">
+                                        <img src="Uploads{$mv.thumb}" width="60" height="60" />
+                                    </div>
+                                    <div class="name">
+                                        {$mv.visitname|msubstr=0,10}
+                                    </div>
+                                    </a>
+                                </li>
+                            </volist>
+                        </ul>
+                   </div>
+                   <div class="block_b">
+                        <div class="page">{$page}</div>
+                   </div>
+               </div>
+                
+            </div>
+            <div class="space_fr">
+                <include file="Member:right" />
+            </div>
+        </div>
+    </div>
+
+<include file='Public:footer' />

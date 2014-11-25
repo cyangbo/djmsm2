@@ -1,0 +1,92 @@
+﻿<div id="footer">
+
+        
+    <div class="waper">
+        <div class="footerwaper">
+            <div class="footer_intro">
+                <div class="footer_logo"></div>
+                <p>Copyright &#169; 2014 djmsm.com 备案号：粤ICP备13074847<br />
+                </p>
+            </div>
+            <div class="footer_link">
+                <ul>
+                    <li><a href="index.html">网站首页</a></li>
+                    <li><a href="index.html">关于我们</a></li>
+                    <li> <a href="index.html">联系我们</a></li>
+                    <li> <a href="index.html">意见反馈</a></li>
+                    <li> <a href="index.html">卖家报名</a></li>
+                    <li><a href="index.html">站点地图</a></li>
+                    <li> <a href="index.html">友情链接</a></li>
+                </ul>
+            </div>
+            <div class="attention">
+                在这里关注我们的动向
+                <br/>
+                <a id="qzone" href="http://user.qzone.qq.com/891639397" target="_blank" title="QQ空间">QQ空间</a> 
+                <a id="sinaweibo" href="http://weibo.com/gztaojz"  target="_blank" title="新浪微博">新浪微博</a>
+                <a id="qqweibo" href="http://t.qq.com/cyangbo"  target="_blank" title="腾讯微博">腾讯微博</a>
+            </div>
+        </div>
+    </div>
+
+
+<!--页脚结束-->
+            
+            
+            
+        <script language="javascript" type="text/javascript" src="http://js.users.51.la/17440234.js"></script>
+<noscript><a href="http://www.51.la/?17440234" target="_blank"><img alt="&#x6211;&#x8981;&#x5566;&#x514D;&#x8D39;&#x7EDF;&#x8BA1;" src="http://img.users.51.la/17440234.asp" style="border:none" /></a></noscript>
+<script type="text/javascript">
+    $(function(){
+       $('.qrcode_img').mousemove(function(){
+           $('.qrcode').show();
+       }).mouseleave(function(){
+           $('.qrcode').hide();
+       });
+    });
+</script>    
+
+            
+            
+        </div>
+    <script>
+			//监听window滚定时间,取得window对象,取得scroll事件
+			$(window).scroll(function() {
+				//
+				var windowHeight = $(window).scrollTop();
+				//sideHeight窗口的滚动距离
+				var sideHeight = $('#J_BdSide').height();
+				var ccc = '195';
+				if (windowHeight > ccc) {
+					$('#J_BdSide').css({
+						'position' : 'fixed',
+						left: '26px',
+						top : 0
+					});
+					$('#kechen').css({
+						'position' : 'fixed',
+						
+						top : 0
+					});
+					$('#mybox').css({
+						
+						'margin-top':'55px'
+					});
+				} else {
+					$('#J_BdSide').css({
+						'position' : 'static'
+					});
+					$('#kechen').css({
+						'position' : 'inherit'
+						
+					});
+					$('#mybox').css({
+						
+						'margin-top':'0px'
+					});
+				}
+				
+			});
+		</script>    
+    </body>
+</html>

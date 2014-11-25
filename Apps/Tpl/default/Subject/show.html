@@ -1,0 +1,82 @@
+<include file='Public:header' />
+<script type="text/javascript">
+    $(function(){
+        //加关注
+        $('.addfollow').click(function(){
+           var followname=$(this).attr('name'); 
+           $.get("{:U('Product/addfollow',array('u'=>'"+followname+"'))}",function(data){
+               if (data.status===1){
+                    alert('关注成功！');
+                }else{
+                    if(data.info==='未登录'){
+                        showBg();
+                    }else if(data.info==='已关注'){
+                        alert('已关注过啦！');
+                    }else if(data.info==='自己'){
+                        alert('自己都不认识啦！');
+                    }else{
+                        alert('关注成功，'+data.data+'请重试！');
+                    }
+                }
+           });
+        });
+        
+    });
+    
+    function del($id){
+        if (window.confirm('是否要删除主题？')){
+            location.href ="{:U('Subject/del',array('id'=>'"+$id+"'))}";
+        }
+    }
+
+</script>
+<div id="main">
+    <include file='Public:login' />
+    <div class="product_box">
+        <div class="product_box_lt">
+            <div class="position">
+                <volist name="position" id="vo">
+                    <a href="{:U('Subject/index',array('id'=>$vo['id']))}">{$vo.catname}</a>&nbsp;&gt;&nbsp;
+                </volist>
+            </div>
+            <div class="info">
+                <div class="title">{$data.title}</div>
+                <div class="memberinfo">
+                    <a href="{:U('Member/space',array('u'=>$data['membername']))}" target="_blank"><img src="__ROOT__/Uploads{$data.memberid|getMemberLogo}" width="80" height="80" /></a>
+                    <div class="memberother">
+                        <div class="membername"><a href="{:U('Member/space',array('u'=>$data['membername']))}" target="_blank">{$data.membername}</a></div>
+                        <div class="addfollow" name="{$data['membername']}">加关注</div>
+                        <div class="commenttime">创建于：{$data.create_time|toDate='Y-m-d H:i:s'}</div>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <if condition="session('account') eq $data['membername']">
+                    <div style="margin-top: 5px;"><a href="{:U('Subject/edit',array('id'=>$data['id']))}" target="_blank">修改</a>&nbsp;|&nbsp;<a href="javascript:return false;" onclick="del({$data['id']});">删除</a></div>
+                </if>
+                
+            </div>
+            <div class="content">
+                
+                {$data.content}
+               
+            </div>
+            <?php $url=U('Subject/addcomment');?>
+            <include file="Public:comment" />
+            
+
+        </div>
+        <div class="product_box_rt">
+            <div class="product_recommend">
+                <h3>热门推荐</h3>
+                <ul>
+                    <yufu:subject catid="80" order="hits desc" num="10">
+                    <li><a href="{:U('Subject/show',array('id'=>$subject['id']))}">{$subject.title|msubstr=0,20}</a></li>
+                    </yufu:subject>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+</div>
+
+<include file='Public:footer' />

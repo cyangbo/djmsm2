@@ -1,0 +1,77 @@
+<include file="Public:header" />
+<script language="JavaScript">
+    <!--
+    $(function(){
+        
+        $('#form1').ajaxForm({
+            beforeSubmit:  checkForm, 
+            success:       complete, 
+            dataType: 'json'
+        });
+
+        function checkForm(){
+            if( '' == $.trim($('#account').val())){
+                alert('用户名不能为空');
+                return false;
+            }
+
+        }
+        function complete(data){
+            if (data.status==1){
+                window.location.href=data.url;
+                
+            }else{
+                alert(data.info);
+            }
+        }
+    });
+    
+    //-->
+</script>
+    <div class="memberbox">
+        
+        <div class="memberbox_login">
+            <h2>会员登录</h2>
+            <form method='post' id="form1" action="{:U('Member/checkLogin')}" >      
+                <table cellpadding="3" cellspacing="6" >
+                    <tr>
+                        <td>用户名：</td>
+                        <td><input type="text" name="account" id="account" class="ipt4"></td>
+                    </tr>
+                    <tr>
+                        <td>密 码：</td>
+                        <td><input type="password" name="password" id="password" class="ipt4"></td>
+                    </tr>
+                    <tr>
+                        <td>验证码：</td>
+                        <td>
+                            <script type='text/javascript'>
+                                var YXM_PUBLIC_KEY = '{$YXM_PUBLIC_KEY}';
+                                var YXM_localsec_url = '{$YXM_localsec_url}';
+                                function YXM_local_check()
+                                {
+                                    if(typeof(YinXiangMaDataString)!='undefined')return;
+                                    YXM_oldtag = document.getElementById('YXM_script');
+                                    var YXM_local=document.createElement('script');
+                                    YXM_local.setAttribute("type","text/javascript");
+                                    YXM_local.setAttribute("id","YXM_script");
+                                    YXM_local.setAttribute("src",YXM_localsec_url+'yinxiangma.js?pk='+YXM_PUBLIC_KEY+'&v=YinXiangMa_PHPSDK_4.0');
+                                    YXM_oldtag.parentNode.replaceChild(YXM_local,YXM_oldtag);  
+                                }
+                                setTimeout("YXM_local_check()",3000);
+                                document.write("<input type='hidden' id='YXM_here' /><script type='text/javascript' charset='gbk' id='YXM_script' src='http://api.yinxiangma.com/api3/yzm.yinxiangma.php?pk="+YXM_PUBLIC_KEY+"&v=YinXiangMaPHPSDK_4.0'><"+"/script>");
+                            </script>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td class="center"><input type="submit" id="submit" value="登 录" class="submit medium hMargin"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+        
+    </div>
+<div class="clear10"></div>
+<include file="Public:footer" />

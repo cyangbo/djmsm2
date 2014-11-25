@@ -1,0 +1,113 @@
+<include file='Public:header' />
+<script type="text/javascript">
+    var likeUrl="{:U('Article/xh',array('id'=>$data['id']))}";
+    var collectUrl="{:U('Article/addCollect',array('id'=>$data['id'],'catid'=>$data['catid']))}";
+</script>
+<script type="text/javascript" src="../Public/js/jquery.yufu5.js"></script>
+    
+        <div id="main">
+            <include file='Public:login' />
+            <div class="product_h">
+                <div class="product_img">
+                    <a href="<empty name="data.buyurl">{$data.sourceurl}<else />{$data.buyurl}</empty>" target="_blank">
+                        <img id="maximg" src="__ROOT__/Uploads{$data['thumb'][0]}" width="500" height="500" />
+                    </a>
+                    <ul>
+                        <volist name='data.thumb' id='vo'>
+                        <if condition="$key lt 5">
+                        <li><img src="__ROOT__/Uploads{$vo|str_replace='.jpg','_100x100.jpg',###}" style="cursor: pointer;" width="100" height="100" /></li>
+                        </if>
+                        </volist>
+                    </ul>
+                </div>
+                
+                <div class="product_info">
+                    <div class='title' title="{$data.title}">{$data.title|msubstr=0,25}</div>
+                    <div class="description"></div>
+                    <div class="buy"><a href="{:U('Article/link',array('id'=>$data['id']))}" class='jdgm' target='_blank'>进店购买</a></div>
+                    <div class="brand">品牌：<span>{$data.brand}</span></div>
+                    <div class="mall">商家：<span>{$data.mallid|getMallName}<span></div>
+                    <div class="price">
+                        价格：<span>￥
+                            <if condition="data.hdprice gt 0">
+                                {$data.hdprice}
+                                <else />
+                                {$data.price}
+                            </if>
+                            <span>
+                    </div>
+                    <div class="service">
+                        服务：<span>
+                                <eq name="data.baoyou" value="1">包邮&nbsp;</eq>
+                                <eq name="data.asfh" value="1">按时发货&nbsp;</eq>
+                                <eq name="data.jstk" value="1">极速退款&nbsp;</eq>
+                                <eq name="data.thbzk" value="1">退货保障卡&nbsp;</eq>
+                                <eq name="data.smth" value="1">上门退货&nbsp;</eq>
+                                <eq name="data.qtth" value="1">七天退换&nbsp;</eq>
+                                <eq name="data.jfbgwdx" value="1">集分宝购物抵现&nbsp;</eq>
+                                <eq name="data.yfx" value="1">运费险&nbsp;</eq>
+                            <span>
+                    </div>
+                    <div class="other">
+                        <!-- Baidu Button BEGIN -->
+                        <a class="bdshare_t bds_tools get-codes-bdshare fx" id="bdshare">
+                            <span class="bds_more nobg">分享</span>
+                        </a>
+                        <script data="type=tools&amp;uid=769641" id="bdshare_js" type="text/javascript" src="http://bdimg.share.baidu.com/static/js/bds_s_v2.js?cdnversion=376930"></script>
+                        <script id="bdshell_js" type="text/javascript" src="http://share.baidu.com/static/js/shell_v2.js?cdnversion=17"></script>
+                        <script type="text/javascript">document.getElementById("bdshell_js").src = "http://share.baidu.com/static/js/shell_v2.js?cdnversion=" + new Date().getHours();</script>
+                        <!-- Baidu Button END -->
+                        <a href="javascript:return false;" class='xh'>喜欢<span>({$data.xihuan})</span></a><a href="javascript:return false;" class='collect'>收藏<span></span></a>
+                    </div>
+                    
+                    
+                </div>
+            </div>
+            <div class="product_box">
+                <div class="product_box_lt">
+                    <div class="content">
+                        <h3>商品展示</h3>
+                        {$data.content}
+                    </div>
+                    <div class="recommend">
+                        <h3>猜你喜欢</h3>
+                        <ul>
+                        <yufu:article catid="60" order="rand()" num="8">
+                  
+                            <li <eq name='key' value='3'>class="clearmr"</eq>>
+                            <a href="{:U('Article/show',array('id'=>$article['id']))}" target="_blank">
+                                <img src="__ROOT__/Uploads{$article['thumb'][0]|str_replace='.jpg','_300x300.jpg',###}" width="150" height="150"/>
+                                <div class="title">{$article.title|msubstr=0,25}</div>
+                            </a>
+                        </li>
+                        </yufu:article>
+                        </ul>
+                    </div>
+                    <?php $url=U('Article/addcomment');?>
+                    <include file="Public:comment" />
+                    
+                    
+                </div>
+                <div class="product_box_rt">
+                    <div class="product_recommend">
+                        <h3>热门推荐</h3>
+                        <ul>
+                            <yufu:article catid="60" order="hits desc" num="10">
+                            <li><a href="{:U('Article/show',array('id'=>$article['id']))}" target="_blank">{$article.title|msubstr=0,20}</a></li>
+                            </yufu:article>
+                        </ul>
+                    </div>
+                    <div class="product_recommend">
+                        <yufu:advert settag="article_detail_right" />
+                    </div>
+                </div>
+            </div>
+        </div>
+<script type="text/javascript">
+    $('.xh').click(function(){
+       $.get("{:U('Article/xh',array('id'=>$data['id']))}",function(data){
+            $('.xh span').html("("+data+")");
+       }) ;
+    });
+</script>
+<include file='Public:footer' />

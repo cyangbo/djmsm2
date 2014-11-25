@@ -1,0 +1,404 @@
+<?php header("location: http://www.djmsm.com/index.php?m=tuan&a=index&id=53"); ?>
+<include file='Public:header' />
+
+<div id="main">
+
+							<yufu:category catid="61">
+                                <if condition="$key eq 0">
+                                    <span><a href="{:U('Product/index',array('id'=>$category['id']))}" target="_blank">所有</a></span>
+                                <elseif condition="$key lt 11" />
+                                    <a href="{:U('Product/index',array('id'=>$category['id']))}" target="_blank">{$category.catname}</a>
+                                </if>
+                            </yufu:category>
+                            
+                             <dt>其他主题导航</dt>
+                     <volist name="nav_list" id="vo">
+                    	<dd><a href="{$vo.url}" id="nav_{$vo.id}">{$vo.catname}</a></dd>
+                     </volist>   
+                            
+                            
+                  
+                                <yufu:product catid="42" order="update_time desc">
+                            <li>
+                                
+                                <div class="info">
+                                    <a href="{:U('Product/link',array('id'=>$product['id']))}" target="_blank">
+                                    <img src="{$product['thumb'][0]|str_replace='.jpg','_300x300.jpg',###}" width="218" height="218"/>
+                                    </a>
+                                    &nbsp;<?php echo number_format($product['hdprice']/$product['price'],2)*10 ?>折&nbsp;&nbsp;原价：￥<del>{$product['price']|round=###,2}</del>&nbsp;&nbsp;节省：￥{$product['price']-$product['hdprice']}
+                                </div>
+                                <div class="price">
+                                    <span>￥{$product.hdprice|round=###,2}</span><a href="<empty name="tuan.buyurl">{$product.sourceurl}<else />{$product.buyurl}</empty>" target="_blank">去抢购</a>
+                                </div>
+                            </li>
+                            </yufu:product>              
+                  
+                  
+                  
+                  <volist name="list" id="vo">
+            <div class="box">
+				<div class="he-wrap tpl2">
+					<img src="{$vo['thumb'][0]|str_replace='.jpg','.jpg_300x300.jpg',###}" width="320px" height="320px"/>
+					<div class="he-view">
+						<div class="bg a0"  data-animate="fadeIn">
+							<div class="center-bar">
+							<a href="{:U('Product/link',array('id'=>$vo['id']))}" class="twitter a0" data-animate="rotateInLeft" target="_blank"></a>
+								
+							</div>
+						</div>
+					</div>			
+                    <div>
+                    <ul>
+                    	<li style="width:315px;"><a href="{:U('Product/link',array('id'=>$vo['id']))}" target="_blank">{$vo.title}</a>
+                        <!-- <?php echo number_format($vo['hdprice']/$vo['price'],2)*10 ?>折 -->
+                     <!--    原价：￥<del>{$vo['price']|round=###,2}</del>&nbsp;&nbsp;节省：￥{$vo['price']-$vo['hdprice']}
+				￥
+				 -->
+				促销价:{$vo.hdprice|round=###,2}<a href="<empty name="vo.buyurl">{$vo.sourceurl}<else />{$vo.buyurl}</empty>" target="_blank"></a>月销量:{$vo.monthsale}</li>
+                    </ul>
+                    </div>			
+				</div>	
+				
+	     
+	     
+	     
+			</div>
+			<div>
+	
+			</div>
+			</volist>
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                  
+                            
+
+
+            <li><a href="{:U('Product/index',array('id'=>$position[0]['id']))}" <eq name="id" value="$position[0]['id']">class="cur"</eq>>所有</a></li>
+            <yufu:product name="categorylist" id="category1">
+                <if condition="$category1['id'] eq $position[0]['id']">
+                <volist name="category1.pid" id="category2">
+                    <li><a href="{:U('Product/index',array('id'=>$category2['id']))}" title="{$category2['catname']}" >{$category2['catname']}</a></li>
+                </volist>
+                </if>
+            </yufu:product> 
+
+            <div class="main_inner">
+                <div class="main_inner_left">
+                    <div class="main_box three">
+                        <ul>
+                            <yufu:product catid="61" order="tuijian desc,update_time desc" num="1">
+                            <li>
+                                <a href="{:U('Product/show',array('id'=>$product['id']))}" target="_blank">
+                                    <img src="__ROOT__/Uploads{$product['thumb'][0]|str_replace='.jpg','_300x300.jpg',###}" width="220" height="220"/>
+                                    <div class="title">{$product.title|msubstr=0,20}</div>
+                                </a>
+                            </li>
+                            </yufu:product>
+                            <yufu:product catid="38" order="tuijian desc,update_time desc" num="1">
+                            <li>
+                                <a href="{:U('Product/show',array('id'=>$product['id']))}" target="_blank">
+                                    <img src="__ROOT__/Uploads{$product['thumb'][0]|str_replace='.jpg','_300x300.jpg',###}" width="220" height="220"/>
+                                    <div class="title">{$product.title|msubstr=0,20}</div>
+                                </a>
+                            </li>
+                            </yufu:product>
+                            <yufu:product catid="39" order="tuijian desc,update_time desc" num="1">
+                            <li class="clearmr">
+                                <a href="{:U('Product/show',array('id'=>$product['id']))}" target="_blank">
+                                    <img src="__ROOT__/Uploads{$product['thumb'][0]|str_replace='.jpg','_300x300.jpg',###}" width="220" height="220"/>
+                                    <div class="title">{$product.title|msubstr=0,20}</div>
+                                </a>
+                            </li>
+                            </yufu:product>
+                        </ul>
+                    </div>
+                    
+                    <div class="main_box">
+                        <h3>
+                            
+                        </h3>
+                        <ul>
+                            <yufu:product catid="37" order="update_time desc" num="5">
+                            <if condition="$key eq 0">
+                                <li style="width: 264px; height: 264px;">
+                                <a href="{:U('Product/show',array('id'=>$product['id']))}" target="_blank">
+                                    <img src="__ROOT__/Uploads{$product['thumb'][0]|str_replace='.jpg','_300x300.jpg',###}" width="264" height="264"/>
+                                    {$product.title|msubstr=0,20}
+                                </a>
+                            <elseif condition="$key eq 1" />
+                                <li style="width: 132px; height: 132px;">
+                                <a href="{:U('Product/show',array('id'=>$product['id']))}" target="_blank">
+                                    <img src="__ROOT__/Uploads{$product['thumb'][0]|str_replace='.jpg','_300x300.jpg',###}" width="132" height="132"/>
+                                    {$product.title|msubstr=0,20}
+                                </a>
+                            <elseif condition="$key eq 2" />
+                                <li style="width: 264px; height: 132px;">
+
+                                <a href="{:U('Product/show',array('id'=>$product['id']))}" target="_blank">
+                                    <img src="__ROOT__/Uploads{$product['thumb'][0]|str_replace='.jpg','_300x300.jpg',###}" width="264" height="264"/>
+                                    {$product.title|msubstr=0,20}
+                                </a>
+                            <elseif condition="$key eq 3" />
+                                <li style="width: 264px; height: 132px;">
+
+                                <a href="{:U('Product/show',array('id'=>$product['id']))}" target="_blank">
+                                    <img src="__ROOT__/Uploads{$product['thumb'][0]|str_replace='.jpg','_300x300.jpg',###}" width="264" height="264"/>
+                                    {$product.title|msubstr=0,20}
+                                </a>
+                            <elseif condition="$key eq 4" />
+                                <li style="width: 132px; height: 132px;">
+
+                                <a href="{:U('Product/show',array('id'=>$product['id']))}" target="_blank">
+                                    <img src="__ROOT__/Uploads{$product['thumb'][0]|str_replace='.jpg','_300x300.jpg',###}" width="132" height="132"/>
+                                    {$product.title|msubstr=0,20}
+                                </a>
+                            </if>
+                            </li>
+                            </yufu:product>
+                        </ul>
+                    </div>
+                    <div class="main_box">
+                        <h3>
+                            <yufu:category catid="38">
+                                <if condition="$key==0">
+                                    <span>大家喜欢的<a href="{:U('Product/index',array('id'=>$category['id']))}" target="_blank">{$category.catname}</a></span>
+                                <elseif condition="$key lt 8" />
+                                    <a href="{:U('Product/index',array('id'=>$category['id']))}" target="_blank">{$category.catname}</a>
+                                </if>
+                            </yufu:category>
+                        </h3>
+                        <ul>
+                            <yufu:product catid="38" order="update_time desc" num="7">
+                            <if condition="$key eq 0">
+                                <li style="width: 264px; height: 264px;">
+                                <a href="{:U('Product/show',array('id'=>$product['id']))}" target="_blank">
+                                    <img src="__ROOT__/Uploads{$product['thumb'][0]|str_replace='.jpg','_300x300.jpg',###}" width="264" height="264"/>
+                                    {$product.title|msubstr=0,20}
+                                </a>
+                            <else />
+                                <li style="width: 132px; height: 132px;">
+                                <a href="{:U('Product/show',array('id'=>$product['id']))}" target="_blank">
+                                    <img src="__ROOT__/Uploads{$product['thumb'][0]|str_replace='.jpg','_300x300.jpg',###}" width="132" height="132"/>
+                                    {$product.title|msubstr=0,20}
+                                </a>
+
+                            </if>
+                            </li>
+                            </yufu:product>
+                        </ul>
+                    </div>
+                    <div class="main_box">
+                        <h3>
+                            <yufu:category catid="39">
+                                <if condition="$key==0">
+                                    <span>大家喜欢的<a href="{:U('Product/index',array('id'=>$category['id']))}" target="_blank">{$category.catname}</a></span>
+                                <elseif condition="$key lt 8" />
+                                    <a href="{:U('Product/index',array('id'=>$category['id']))}" target="_blank">{$category.catname}</a>
+                                </if>
+                            </yufu:category>
+                        </h3>
+                        <ul>
+                            <yufu:product catid="39" order="update_time desc" num="5">
+                            <if condition="$key eq 0">
+                                <li style="width: 264px; height: 264px;">
+                                <a href="{:U('Product/show',array('id'=>$product['id']))}" target="_blank">
+                                    <img src="__ROOT__/Uploads{$product['thumb'][0]|str_replace='.jpg','_300x300.jpg',###}" width="264" height="264"/>
+                                    {$product.title|msubstr=0,20}
+                                </a>
+                            <elseif condition="$key eq 1" />
+                                <li style="width: 132px; height: 132px;">
+                                <a href="{:U('Product/show',array('id'=>$product['id']))}" target="_blank">
+                                    <img src="__ROOT__/Uploads{$product['thumb'][0]|str_replace='.jpg','_300x300.jpg',###}" width="132" height="132"/>
+                                    {$product.title|msubstr=0,20}
+                                </a>
+                            <elseif condition="$key eq 2" />
+                                <li style="width: 264px; height: 132px;">
+
+                                <a href="{:U('Product/show',array('id'=>$product['id']))}" target="_blank">
+                                    <img style='margin-top: -100px;' src="__ROOT__/Uploads{$product['thumb'][0]|str_replace='.jpg','_300x300.jpg',###}" width="264" height="264"/>
+                                    {$product.title|msubstr=0,20}
+                                </a>
+                            <elseif condition="$key eq 3" />
+                                <li style="width: 264px; height: 132px;">
+
+                                <a href="{:U('Product/show',array('id'=>$product['id']))}" target="_blank">
+                                    <img style='margin-top: -100px;' src="__ROOT__/Uploads{$product['thumb'][0]|str_replace='.jpg','_300x300.jpg',###}" width="264" height="264"/>
+                                    {$product.title|msubstr=0,20}
+                                </a>
+                            <elseif condition="$key eq 4" />
+                                <li style="width: 132px; height: 132px;">
+
+                                <a href="{:U('Product/show',array('id'=>$product['id']))}" target="_blank">
+                                    <img src="__ROOT__/Uploads{$product['thumb'][0]|str_replace='.jpg','_300x300.jpg',###}" width="132" height="132"/>
+                                    {$product.title|msubstr=0,20}
+                                </a>
+                            </if>
+                            </li>
+                            </yufu:product>
+                        </ul>
+                    </div>
+                    <div class="main_box">
+                        <h3>
+                            <yufu:category catid="40">
+                                <if condition="$key==0">
+                                    <span>大家喜欢的<a href="{:U('Product/index',array('id'=>$category['id']))}" target="_blank">{$category.catname}</a></span>
+                                <elseif condition="$key lt 8" />
+                                    <a href="{:U('Product/index',array('id'=>$category['id']))}" target="_blank">{$category.catname}</a>
+                                </if>
+                            </yufu:category>
+                        </h3>
+                        <ul>
+                            <yufu:product catid="40" order="update_time desc" num="5">
+                            <if condition="$key eq 0">
+                                <li style="width: 264px; height: 264px;">
+                                <a href="{:U('Product/show',array('id'=>$product['id']))}" target="_blank">
+                                    <img src="__ROOT__/Uploads{$product['thumb'][0]|str_replace='.jpg','_300x300.jpg',###}" width="264" height="264"/>
+                                    {$product.title|msubstr=0,20}
+                                </a>
+                            <elseif condition="$key eq 1" />
+                                <li style="width: 132px; height: 132px;">
+                                <a href="{:U('Product/show',array('id'=>$product['id']))}" target="_blank">
+                                    <img src="__ROOT__/Uploads{$product['thumb'][0]|str_replace='.jpg','_300x300.jpg',###}" width="132" height="132"/>
+                                    {$product.title|msubstr=0,20}
+                                </a>
+                            <elseif condition="$key eq 2" />
+                                <li style="width: 264px; height: 132px;">
+                                <a href="{:U('Product/show',array('id'=>$product['id']))}" target="_blank">
+                                    <img src="__ROOT__/Uploads{$product['thumb'][0]|str_replace='.jpg','_300x300.jpg',###}" width="264" height="264"/>
+                                    {$product.title|msubstr=0,20}
+                                </a>
+                            <elseif condition="$key eq 3" />
+                                <li style="width: 264px; height: 132px;">
+                                <a href="{:U('Product/show',array('id'=>$product['id']))}" target="_blank">
+                                    <img src="__ROOT__/Uploads{$product['thumb'][0]|str_replace='.jpg','_300x300.jpg',###}" width="264" height="264"/>
+                                    {$product.title|msubstr=0,20}
+                                </a>
+                            <elseif condition="$key eq 4" />
+                                <li style="width: 132px; height: 132px;">
+                                <a href="{:U('Product/show',array('id'=>$product['id']))}" target="_blank">
+                                    <img src="__ROOT__/Uploads{$product['thumb'][0]|str_replace='.jpg','_300x300.jpg',###}" width="132" height="132"/>
+                                    {$product.title|msubstr=0,20}
+                                </a>
+                            </if>
+                            </li>
+                            </yufu:product>
+                        </ul>
+                    </div>
+                    
+                    <div class="main_box">
+                        <h3><span><a href="{:U('Subject/index',array('id'=>80))}" target="_blank">社区主题</a></span><a href="{:U('Subject/index',array('id'=>80))}" target="_blank" class="more">更多&gt;&gt;</a></h3>
+                        <ul>
+                            <yufu:category catid="80" num="4">
+                                <li>
+                                    <div style="width: 330px; overflow: hidden; margin-bottom: 10px;">
+                                        <a href="{:U('Subject/index',array('id'=>$category['id']))}" target="_blank"><img src="Uploads{$category['thumb']}" width="100" height="100" style="float: left; border: 1px solid #f5f5f5; border-radius: 6px;" /></a>
+                                        <div style="margin-left: 110px;">
+                                            <div class="categorytitle">
+                                                <a href="{:U('Subject/index',array('id'=>$category['id']))}" target="_blank">{$category.catname}</a>
+                                            </div>
+                                            <ul>
+                                                <yufu:subject catid="'.$category['id'].'" num="4">
+                                                    <li><a href="{:U('Subject/show',array('id'=>$subject['id']))}" title="{$subject.title}" target="_blank">{$subject.title|msubstr=0,16}</a></li>
+                                                </yufu:subject>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="clear"></div>
+                                </li>
+                            </yufu:category>
+                        </ul>
+                    </div>
+
+                </div>
+                <div class="main_inner_right">
+                    <div class="main_side">
+                        <h3>抢购啦<span><a href="{:U('Tuan/index',array('id'=>53))}" target="_blank">更多&gt;&gt;</a></span></h3>
+                        <ul class="tuanlist">
+                            <yufu:tuan catid="53" order="update_time desc" num="3">
+                            <li>
+                                
+                                <div class="info">
+                                    <a href="{:U('Tuan/show',array('id'=>$tuan['id']))}" target="_blank">
+                                    <img src="__ROOT__/Uploads{$tuan['thumb'][0]|str_replace='.jpg','_300x300.jpg',###}" width="218" height="218"/>
+                                    </a>
+                                    &nbsp;<?php echo number_format($tuan['hdprice']/$tuan['price'],2)*10 ?>折&nbsp;&nbsp;原价：￥<del>{$tuan['price']|round=###,2}</del>&nbsp;&nbsp;节省：￥{$tuan['price']-$tuan['hdprice']}
+                                </div>
+                                <div class="price">
+                                    <span>￥{$tuan.hdprice|round=###,2}</span><a href="<empty name="tuan.buyurl">{$tuan.sourceurl}<else />{$tuan.buyurl}</empty>" target="_blank">去抢购</a>
+                                </div>
+                            </li>
+                            </yufu:tuan>
+                        </ul>
+            
+                    </div>
+                    <div class="main_side">
+                        <h3>超值啦<span><a href="{:U('Article/index',array('id'=>60))}" target="_blank">更多&gt;&gt;</a></span></h3>
+                        <ul class="articlelist">
+                            <yufu:article catid="60" order="hits desc" num="10">
+                            <li><a href="{:U('Article/show',array('id'=>$article['id']))}" target="_blank">{$article.title|msubstr=0,18}</a></li>
+                            </yufu:article>
+                        </ul>
+                    </div>
+                    <div class="main_side">
+                        <h3>发券啦<span><a href="{:U('Quan/index',array('id'=>62))}" target="_blank">更多&gt;&gt;</a></span></h3>
+                        <ul class="quanlist">
+                            <yufu:quan catid="62" order="hits desc" num="5">
+                            <li><a href="{:U('Quan/show',array('id'=>$quan['id']))}" target="_blank">{$quan.title|msubstr=0,20}</a></li>
+                            </yufu:quan>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+  <!--        
+ <div class="link">
+    <ul>
+        <li><span>友情链接：</span></li>
+        <volist name="list" id="vo">
+            <if condition="$vo['type'] eq 0 ">
+                <if condition="$vo['linktype'] eq 0">
+                <li><a href="{$vo.url}" target="_blank">{$vo.name}</a></li>
+                </if>
+            </if>
+        </volist>
+        <li><a href="{:U('Link/index')}" style="color:red;">更多&gt;</a></li>
+    </ul>
+</div>
+	-->  
+            
+</div>
+<script type="text/javascript">
+var t = n = 0, count = $("#play_list a").size();
+$(function(){	
+    $("#play_list a:not(:first-child)").hide();
+    $("#play_info").html($("#play_list a:first-child").find("img").attr('alt'));
+    $("#play_info").click(function(){window.open($("#play_list a:first-child").attr('href'), "_blank");});
+    
+    $("#play_text li:first-child").css({"background":"#fff",'color':'#000'});
+    $("#play_text li").click(function() {
+            var i = $(this).text() - 1;
+            n = i;
+            if (i >= count) return;
+            $("#play_info").html($("#play_list a").eq(i).find("img").attr('alt'));
+            $("#play_info").unbind().click(function(){window.open($("#play_list a").eq(i).attr('href'), "_blank");});
+            $("#play_list a").filter(":visible").fadeOut(500).parent().children().eq(i).fadeIn(1000);
+            $(this).css({"background":"#fff",'color':'#000'}).siblings().css({"background":"#000",'color':'#fff'});
+    });
+    t = setInterval("showAuto()", 5000);
+    $("#play").hover(function(){clearInterval(t);}, function(){t = setInterval("showAuto()", 5000);});
+});
+
+function showAuto(){
+    n = n >= (count - 1) ? 0 : ++n;
+    $("#play_text li").eq(n).trigger('click');
+}
+</script>
+<include file='Public:footer' />

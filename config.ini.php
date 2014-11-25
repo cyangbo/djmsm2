@@ -1,0 +1,30 @@
+<?php
+if(!defined('THINK_PATH')) exit();
+return $array = array(
+	'DB_TYPE'=>'mysql',
+	'DB_HOST'=>'localhost',
+	'DB_NAME'=>'cyangbo2',
+	'DB_USER'=>'root',
+	'DB_PWD'=>'ccmiu',
+	'DB_PORT'=>3306,
+	'DB_PREFIX'=>'yufu_',
+	'DB_BACKUP'=>'../Data/backup',
+	'RBAC_ROLE_TABLE'=>'yufu_role',
+	'RBAC_USER_TABLE'=>'yufu_user',
+	'RBAC_ACCESS_TABLE'=>'yufu_access',
+	'RBAC_NODE_TABLE'=>'yufu_node',
+	'URL_CASE_INSENSITIVE'=>true,
+	'WX_TOKEN'=>'yf5188bc0a11b4b036420098',
+	'VAR_PAGE'=>'p',
+	'SITE_NAME'=>'大家买什么',
+	'DOMAIN_NAME'=>'http://www.djmsm.com',
+	'SITE_TITLE'=>'淘宝折扣|优惠|促销|秒杀',
+	'SITE_KEYWORDS'=>'淘宝折扣 优惠 促销 秒杀',
+	'SITE_DESCRIPTION'=>'淘宝折扣 优惠 促销 秒杀',
+	'URL_MODEL'=>0,
+	'DEFAULT_THEME'=>'default',
+	'APPKEY'=>'LW23038885',
+	'SECRET'=>'e6826ae38897f004f3e9f8d6965dc1bc',
+	'TAOKEAPI'=>1,
+);
+?>

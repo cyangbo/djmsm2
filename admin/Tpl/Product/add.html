@@ -1,0 +1,387 @@
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/js/calendar/jscal2.css"/>
+<link rel="stylesheet" type="text/css" href="../Public/js/calendar/border-radius.css"/>
+<link rel="stylesheet" type="text/css" href="../Public/js/calendar/win2k.css"/>
+<script type="text/javascript" src="../Public/js/calendar/calendar.js"></script>
+<script type="text/javascript" src="../Public/js/calendar/lang/en.js"></script>
+<script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey={$app_key}"></script>
+<div class="main">
+<!--遮罩-->
+<div id="fullbg"></div>
+<div id="dialog" style="height: 80px;">
+    <p>请稍等，正在获取商品信息。。。<img src="../Public/images/load.gif" style="margin-left: 20px;" /></p>
+</div>
+<!--遮罩结束-->
+            <div class="box_tit">
+                <h2>添加商品</h2>
+            </div>
+            <div class="form_list">
+                
+                <include file="Public:prodes" />
+                <form method='post' id="form1" name="form1" action="{:U('Product/insert')}"  enctype="multipart/form-data">
+                <div class="listtop">
+                <dl>
+                    <dt> 栏目：</dt>
+                    <dd style="width: 520px; position: relative;">
+                        <label class="label">{$catid|getCategoryName}</label><input type="hidden" name="catid" value="{$catid}"><span style="position: absolute; right: 0; bottom: 0;"><input type="checkbox" id="caijiimg" checked="checked" title="网络图片保存到服务器端">&nbsp;网络图片保存到服务器端</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 商品链接：</dt>
+                    <dd>
+                        <input type="text" class="ipt8" name="sourceurl" id="sourceurl" value=""><span class="autopro" id="autoproinfo">获取商品信息</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 商家名称：</dt>
+                    <dd>
+                        <select name="mallid" id="mallid">
+                            <volist name="malllist" id="vo1">
+                                <if condition="$vo1['id'] eq $vo['mallid']">
+                                    <option value="{$vo1['id']}" selected="selected">{$vo1['mallname']}</option>
+                                <else />
+                                <option value="{$vo1['id']}">{$vo1['mallname']}</option>
+                                </if>
+                            </volist>
+                        </select>
+                        <span class="fontcolor">系统会根据商品链接自动匹配，如果匹配有误，用户可以手动选择</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 标题：</dt>
+                    <dd>
+                        <input type="text" class="ipt8" name="title"><span class="red">*</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>自定义title：</dt>
+                    <dd>
+                        <input type="text" class="ipt8" name="sitetitle"><span class="fontcolor">如果title为空，默认用标题作为title内容</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>keywords：</dt>
+                    <dd>
+                        <input type="text" class="ipt5" name="keywords"><span class="fontcolor">网页Meta标签的keywords关键词处显示,此处会显示在商品页的本商品页面!</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt>description：</dt>
+                    <dd>
+                        <textarea name="description" class="fLeft"></textarea><span class="fontcolor" style="float: left; width: 200px;">网页Meta标签的description处显示,此处会显示在商品页的本商品页面!</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 商品价格：</dt>
+                    <dd>
+                        <input type="text" class="ipt2" name="price" value=''><span class="fontcolor">原价，保留2位小数</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 活动价格：</dt>
+                    <dd>
+                        <input type="text" class="ipt2" name="hdprice" value=''><span class="fontcolor">促销价、优惠价等,保留2位小数</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 开始时间：</dt>
+                    <dd>
+                        <input type="text" name="starttime" id="starttime" class="ipt4" style="background: #EBEBE4;">
+                        <script type="text/javascript">
+                            Calendar.setup({
+                                weekNumbers: true,
+                                inputField : "starttime",
+                                trigger    : "starttime",
+                                dateFormat: "%Y-%m-%d %H:%M:%S",
+                                showTime: true,
+                                minuteStep: 1,
+                                onSelect   : function() {this.hide();}
+                            });
+                        </script>
+                        <span class="fontcolor">活动开始时间</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 结束时间：</dt>
+                    <dd>
+                        <input type="text" name="endtime" id="endtime" class="ipt4" style="background: #EBEBE4;">
+                        <script type="text/javascript">
+                            Calendar.setup({
+                                weekNumbers: true,
+                                inputField : "endtime",
+                                trigger    : "endtime",
+                                dateFormat: "%Y-%m-%d %H:%M:%S",
+                                showTime: true,
+                                minuteStep: 1,
+                                onSelect   : function() {this.hide();}
+                            });
+                        </script>
+                        <span class="fontcolor">活动结束时间</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 品牌：</dt>
+                    <dd>
+                        <input type="text" class="ipt4" name="brand">
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 月销量：</dt>
+                    <dd>
+                        <input type="text" class="ipt2" name="monthsale" value='0'>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 服务：</dt>
+                    <dd>
+                        <input type="checkbox" name="baoyou">&nbsp;包邮
+                        <input type="checkbox" name="asfh">&nbsp;按时发货
+                        <input type="checkbox" name="jstk">&nbsp;极速退款
+                        <input type="checkbox" name="thbzk">&nbsp;退货保障卡
+                        <input type="checkbox" name="smth">&nbsp;上门退货
+                        <input type="checkbox" name="qtth">&nbsp;七天退换
+                        <input type="checkbox" name="jfbgwdx">&nbsp;集分宝购物抵现
+                        <input type="checkbox" name="yfx">&nbsp;运费险
+                    </dd>
+                </dl>
+                
+                <dl>
+                    <dt> 推广链接：</dt>
+                    <dd>
+                        <input type="text" class="ipt8" name="buyurl" id="buyurl" value=""><span class="huise">如：淘宝客链接或pid链接</span>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt style="height: 80px; line-height: 80px; "> 
+                    商品图片：
+                    </dt>
+                    <dd style="width: 600px;">
+                        <ul class="imglist"></ul>
+                        <div class="cboth"></div>
+                        <div class="tjthumb">
+                        <input type="file" class="thumb" name="thumb[]" /><a href="javascript:void(0);" id="tjthumb"  style="margin-left: 5px;" title="新增"><img src="../Public/images/tv-expandable.gif" /></a> 
+                        </div>
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 推荐位：</dt>
+                    <dd>
+                        <input type="checkbox" name="tuijian">&nbsp;首页推荐
+                        <input type="checkbox" name="zhiding">&nbsp;栏目页置顶
+                    </dd>
+                </dl>
+                <dl>
+                    <dt> 商品介绍：</dt>
+                </dl>
+                </div>
+                <div class="listbottom">
+                        <textarea name="content" id="myEditor"></textarea>
+                        <script type="text/javascript">
+                            var editor = new UE.ui.Editor();
+                            editor.render("myEditor");
+                            //1.2.4以后可以使用一下代码实例化编辑器
+                            //UE.getEditor('myEditor')
+                        </script>
+                 </div>
+                
+                <div class="form_b">
+                    <input type="submit" class="submit btn7" id="submit" value="提 交">
+                </div>
+               </form>
+            </div>
+            
+        </div>
+<script type="text/javascript">
+    $(function(){
+        
+        $('input[name=hdprice]').blur(function(){
+            if($(this).val()!==""){
+                $('#starttime').css('background','');
+                $('#endtime').css('background','');
+            }else{
+                $('#starttime').css('background','#EBEBE4');
+                $('#endtime').css('background','#EBEBE4');
+            }
+        });
+        
+        //添加图片
+        $('#tjthumb').click(function(){
+           var html='<div style="margin-top: 5px;"><input type="file" class="thumb" name="thumb[]" /><a href="javascript:return false;" onclick="delthumb(this); " style="margin-left: 5px;" title="取消"><img src="../Public/images/tv-collapsable.gif" /></a></div>';
+           $(this).parent().parent().append(html); 
+        });
+        
+        //自动获取商家名称
+        $('#sourceurl').blur(function(){
+            var sourceurl=$('input[name=sourceurl]').val();
+            $.get('{:U("Product/getmallinfo")}',{url:sourceurl},function(data){
+                $('#mallid').val(data);
+            });
+           
+        });
+        
+        //自动获取商品信息
+        $('#autoproinfo').click(function(){
+
+            //商家id
+            var mallid=$('select[name="mallid"] :selected').val()
+            //商品链接    
+            var sourceurl=$('input[name=sourceurl]').val();
+            
+            if(sourceurl.trim()==""||sourceurl.trim()=="http://"){
+                alert("请先输入商品链接");
+                return false;
+            }
+           
+            //是否下载图片到服务器端
+            if($('#caijiimg').attr("checked")=="checked"){
+                var downimg=true;
+            }else{
+                var downimg=false;
+            }
+            
+            //开始加载
+            showBg();
+            
+            var appkey="{$app_key}";
+            if(''!==appkey){
+                //获取商品id
+                var itemid=sourceurl.match(/\bid=\d+/);
+                itemid = itemid[0].replace("id=","");
+
+                if(mallid<3){
+
+                    //淘宝客商品链接转换
+                    TOP.api('rest', 'get',{
+                    method:'taobao.taobaoke.widget.items.convert',
+                    num_iids:itemid,
+                    fields:'num_iid,title,nick,pic_url,price,click_url,commission,commission_rate,commission_num,commission_volume,shop_click_url,seller_credit_score,item_location,volume'
+                    },function(resp){
+                          if(resp.error_response){
+                              alert('taobao.taobaoke.widget.items.convert接口获取商品信息品失败!'+resp.error_response.msg);
+                              return false;
+                          }
+                          var respItem=resp.taobaoke_items.taobaoke_item;
+                          for(var i=0;i<respItem.length;i++){
+
+                              $('#buyurl').val(respItem[i].click_url);
+
+                          }
+                    });
+
+                }
+            }
+            
+            
+            //发起get请求
+            $.get('{:U("Product/getproinfo")}',{mid:mallid, url:sourceurl,isdownimg:downimg},function(data){
+
+                $('input[name=title]').attr('value',data.title);
+                if(data.imglist!==""&&data.imglist!==null){
+                    for(var i=0;i<data.imglist.length;i++){
+                        var html='<li><input type="hidden" name="thumb[]" value="'+data.imglist[i]+'"><img src="__ROOT__/Uploads'+data.imglist[i]+'" width="60" height="60" />';
+                         html+='<div class="delthumb"><a href="javascript:return false;" onclick="foreverdelthumb(this); " title="你确定要删除图片吗？">删除图片</a><div></li>';
+                        $('.imglist').append(html); 
+                    }
+                }
+    
+                if(data.buyurl!==""&&data.buyurl!==null){
+                    $('input[name=buyurl]').attr('value',data.buyurl);
+                }
+                $('input[name=price]').attr('value',data.price);
+                $('input[name=hdprice]').attr('value',data.hdprice);
+                $('input[name=monthsale]').attr('value',data.sale);
+                $('input[name=brand]').attr('value',data.brand);
+ 
+                //按时发货
+                if(data.asfh==="true"){
+                    $('input[name=asfh]').attr("checked","checked"); 
+                }else{
+                    $('input[name=asfh]').removeAttr("checked"); 
+                }
+          
+                //极速退款
+                if(data.jstk==="true"){
+                    $('input[name=jstk]').attr("checked","checked"); 
+                }else{
+                    $('input[name=jstk]').removeAttr("checked"); 
+                }
+                
+                //退货保障卡
+                if(data.thbzk==="true"){
+                    $('input[name=thbzk]').attr("checked","checked"); 
+                }else{
+                    $('input[name=thbzk]').removeAttr("checked"); 
+                }
+                //上门退货
+                if(data.smth==="true"){
+                    $('input[name=smth]').attr("checked","checked"); 
+                }else{
+                    $('input[name=smth]').removeAttr("checked"); 
+                }
+
+                //七天退换
+                if(data.qtth==="true"){
+                    $('input[name=qtth]').attr("checked","checked"); 
+                }else{
+                    $('input[name=qtth]').removeAttr("checked");  
+                }
+                //运费险
+                if(data.yfx==="true"){
+                    $('input[name=yfx]').attr("checked","checked"); 
+                }else{
+                    $('input[name=yfx]').removeAttr("checked"); 
+                }
+                
+                //集分宝购物抵现
+                if(data.jfbgwdx==="true"){
+                    $('input[name=jfbgwdx]').attr("checked","checked"); 
+                }else{
+                    $('input[name=jfbgwdx]').removeAttr("checked"); 
+                }
+
+                closeBg();
+               
+           }); 
+           
+        });
+
+        
+    });
+    
+    //取消新增
+    function delthumb(cur){
+        $(cur).parent().remove();
+    };
+    //删除图片
+    function foreverdelthumb(cur){
+        //添加要删除节点
+//        $('.form_b').append($(cur).parent().prev().prev().attr('name','thumbdel[]'));
+        
+        //删除图片
+        var path=$(cur).parent().prev().prev().val();
+        var url="{:U('Product/delthumb',array('path'=>'"+path+"'))}";
+        $.get(url,function(){
+            //移除当前节点
+            $(cur).parent().parent().remove();
+        });
+        
+    }
+    
+    //显示灰色 jQuery 遮罩层
+    function showBg() {
+        var bh = $("body").height();
+        var bw = $("body").width();
+        $("#fullbg").css({
+            height:document.body.scrollHeight,
+            width:document.body.scrollWidth,
+            display:"block"
+        });
+        $("#dialog").show();
+    }
+    //关闭灰色 jQuery 遮罩
+    function closeBg() {
+        $("#fullbg,#dialog").hide();
+    }
+
+</script>
+<include file="Public:footer" />

@@ -1,0 +1,93 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wb="http://open.weibo.com/wb">
+<head>
+
+    <title>{$sitename}-{$title}</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta name="keywords" content="{$keywords}" />
+    <meta name="description" content="{$description}" />
+    <link href="../Public/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="../Public/css/hoverex-all.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="../Public/js/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="../Public/js/jquery.hoverex.js"></script>
+    <script type="text/javascript" src="../Public/js/jquery.form.js"></script>
+    <script src="http://l.tbcdn.cn/apps/top/x/sdk.js?appkey=21732232"></script>
+    #nav_{$position[0]['id']}{background-color:#ED165C;}
+    </style>
+
+</head>
+<body>
+    <div class="onqrcode">
+        <div class="qrcode_img">
+            <img src="../Public/images/wxshow.jpg" />
+        </div>
+        <div class="qrcode" style="display: none;">
+            <img src="Uploads<yufu:set settag="qrcode" />" width="200" height="200" />
+            <div style="font-size:14px; text-align: center; padding-bottom:10px;">微信公众号:大家买什么</div>
+        </div>
+    </div>
+    <!-- 
+    <div class="member">
+    <div class="member_content">
+    	<ul>
+                <if condition="$Think.session.account != null">
+               <li class="huany">欢迎您:&nbsp;<a href="{:U('Member/space',array('u'=>session('account')))}">{$Think.session.account}</a></li>
+                    <li class="tuichu"><a href="{:U('Member/logout')}" target='_top'>退出</a></li>
+                    <else />
+                    <li class="zz"><a href="{:U('Member/register')}">注册</a></li><li  class="zz"><a href="{:U('Member/login')}">登录</a></li>
+                </if>
+                
+                
+                <!-- 
+                &nbsp;&nbsp;<a href="{:U('Content/index',array('id'=>52))}">手机客户端</a>
+               
+        </ul> 
+    </div>
+    </div>
+    
+     -->
+    
+<!--顶部logo-->
+<div class="logo">
+	<div class="logo_left"><a href="http://www.djmsm.com/"><img src="../Public/images/logo.png"></a></div>
+    <div class="logo_right">&nbsp;</div>
+</div>
+<!--顶部logo结束-->
+
+
+     
+     
+     <div id="header">
+        <div class="header_box">
+
+        	<!-- 系统配置的logo
+        	 
+            <a href="__APP__"><img src="__ROOT__/Uploads<yufu:set settag="logo" />" width="234" height="55" /></a>
+             -->
+             
+            <!-- 导航banner -->
+            
+                <ul>
+          			<li><a href="__APP__" id="nav_0">首页</a></li>
+                    <volist name="nav_list" id="vo">
+                        <li >
+                            <a href="{$vo.url}" id="nav_{$vo.id}">{$vo.catname}</a>
+                        </li>
+                    </volist>
+                </ul>
+            
+            <!-- 导航banner结束 -->
+
+            <!-- 
+            <div class="search">
+                <form action="{:U('Product/index',array('id'=>61))}" method="post">
+                    <input type="text" name='search'><input type="submit" class="button" value='搜索' >
+                </form>
+            </div>
+             -->
+        </div>
+    </div>
+     
+  
+    
+     

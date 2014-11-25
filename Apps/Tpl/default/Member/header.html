@@ -1,0 +1,52 @@
+<script type="text/javascript">
+    $(function(){
+        //加关注
+        $('.addfollow').click(function(){
+           var followname=$(this).attr('name'); 
+           $.get("{:U('Product/addfollow',array('u'=>'"+followname+"'))}",function(data){
+               if (data.status===1){
+                    alert('关注成功！');
+                }else{
+                    if(data.info==='未登录'){
+                        showBg();
+                    }else if(data.info==='已关注'){
+                        alert('已关注过啦！');
+                    }else if(data.info==='自己'){
+                        alert('自己都不认识啦！');
+                    }else{
+                        alert('关注成功，'+data.data+'请重试！');
+                    }
+                }
+           });
+        });
+        
+    });
+</script>
+<div class="space_hd">
+    <div class="space_logo">
+        <img src="Uploads{$u|getMemberULogo}" />
+        <a href="javascript:return:false;" class="addfollow" name="{$u}">加关注</a>
+    </div>
+    <div class="hd_other">
+        <div class="hd_info">{$u}的主页
+            <if condition="$Think.session.account == $u">     
+                <span><a href="{:U('Member/index')}">&lt;&lt;返回我的面板</a></span>
+            </if>
+        </div>
+        <div class="space_nav">
+            <ul class="space_nav_fl">
+                <li><a href="{:U('Member/space',array('u'=>$u))}">Ta的首页</a></li>
+                <li><a href="{:U('Member/tacomment',array('u'=>$u))}">Ta的评论({$u|getCommentNum=###,Product})</a></li>
+                <li><a href="{:U('Member/tacollect',array('u'=>$u))}">Ta的收藏({$u|getCollectNum=###,Product})</a></li>
+                <li><a href="{:U('Member/tasubject',array('u'=>$u))}">Ta的主题({$u|getSubjectNum})</a></li>
+                <li><a href="{:U('Member/tafollow',array('u'=>$u))}">Ta的关注({$u|getFollowNum})</a></li>
+                <li><a href="{:U('Member/tavisit',array('u'=>$u))}">Ta的访客({$u|getVisitNum})</a></li>
+            </ul>
+            <ul class="space_nav_fr">
+                
+            </ul>
+        </div>
+        
+    </div>
+    
+</div>

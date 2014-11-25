@@ -1,0 +1,134 @@
+<include file='Public:header' />
+    
+<!--主体内容-->
+<div class="main">
+<div class="container">
+    	<!--主体左边-->
+        <div class="course-sidebar" id="J_BdSide">
+            <div class="course-sidebar-type">
+                <div class="course-sidebar-menu">
+                    <ul>
+                        <li><a class="curr" href="#">分类导航</a></li>
+                    </ul>
+                    <div class="dot-curr"></div>
+                </div>        
+                <div class="course-sidebar-tabs">
+                    <ul class="js-sidebar-lang">
+                     <li><a href="{:U('Tuan/index',array('id'=>$position[0]['id']))}" <eq name="id" value="$position[0]['id']">class="cur"</eq>>所有</a></li>
+            <volist name="categorylist" id="category1">
+                <if condition="$category1['id'] eq $position[0]['id']">
+                <volist name="category1.pid" id="category2">
+                    <li><a href="{:U('Tuan/index',array('id'=>$category2['id']))}" title="{$category2['catname']}" <eq name="id" value="$category2['id']">class="cur"</eq>>{$category2['catname']}</a></li>
+                </volist>
+                </if>
+            </volist>                                                                                       
+                    </ul>
+                </div>
+                
+                <dl class="course-sidebar-level js-sidebar-level">
+                    <dt>其他主题导航</dt>
+                     <volist name="nav_list" id="vo">
+                     
+                    	<dd style="margin-right:8px"><a href="{$vo.url}" id="nav_{$vo.id}">{$vo.catname}</a></dd>
+                     </volist>                                                
+                </dl>
+            </div>
+            <!-- 
+            <div  class="course-sidebar-search">
+            <form action="{:U('Tuan/index',array('id'=>53))}" method="post">
+            <input type="text" name='search' class="js-keyword"  placeholder="商品搜索">
+            
+            </form>
+           
+            </div>
+             -->
+
+        </div>
+        <!--主体左边结束-->
+        <!--主体右边-->
+    	<!-- 
+    	<div id="main">
+    	广告banner
+        <div class="ad_position_id" style="padding: 0 20px;">
+            <yufu:advert settag="tuan_list_top" />
+        </div>
+         -->
+         <!-- 分类 -->
+         
+         
+        <!--主体右边-->
+        
+        <div class="course-content">
+
+            <div class="course-tools"  id="kechencc">
+                <img alt="" src="../Public/images/two11.gif">
+            </div>
+       
+            <!--产品图-->
+            <div id="myboxcc">
+            
+            <!--产品模块-->
+            <div class="pagec a_slow elasticInLeft">
+            
+            <!-- 一行 -->
+            <div class="demowrap cf">
+            <!-- 一个 -->
+            <volist name="list" id="vo">
+            <div class="box">
+				<div class="he-wrap tpl2">
+					<img src="{$vo['thumb'][0]|str_replace='.jpg','.jpg_300x300.jpg',###}" width="320px" height="320px"/>
+					<div class="he-view">
+						<div class="bg a0"  data-animate="fadeIn">
+							<div class="center-bar">
+							<a href="{:U('Tuan/link',array('id'=>$vo['id']))}" class="twitter a0" data-animate="rotateInLeft" target="_blank"></a>
+							 
+								
+							</div>
+						</div>
+					</div>
+					
+					
+                    <div>
+                    <ul>
+                    	<li style="width:315px;"><a href="{:U('Tuan/show',array('id'=>$vo['id']))}" target="_blank">{$vo.title}</a></li><li>
+                        <!-- <?php echo number_format($vo['hdprice']/$vo['price'],2)*10 ?>折 -->
+                     <!--    原价：￥<del>{$vo['price']|round=###,2}</del>&nbsp;&nbsp;节省：￥{$vo['price']-$vo['hdprice']}
+				￥
+				 -->
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;双11价格:&nbsp;<span style="font-size:18px;color:#E22261;">{$vo.hdprice|round=###,3}元</span><a href="<empty name="vo.buyurl">{$vo.sourceurl}<else />{$vo.buyurl}</empty>" target="_blank"></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;折扣力度:&nbsp;<span style="font-size:16px;color:#E22261;">{$vo.sitetitle}</span></li>
+                    </ul>
+                    </div>
+					
+				</div>	
+					
+				      
+			</div>
+			<div>
+			
+			                     	
+			</div>
+			</volist>
+			<!-- 一个 -->
+			</div>
+			<!-- 一行 -->
+			
+		
+			</div>
+			<!--产品模块-->
+			
+		
+         	<!-- 分页 -->
+         	<div class="page">{$page}</div>
+         </div>
+    	<!--产品图结束-->
+         
+         
+        </div>
+        <!--主体左边结束-->
+         
+         
+        
+	</div>       
+</div>
+<!--主体内容-->
+<include file='Public:footer' />

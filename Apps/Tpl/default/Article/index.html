@@ -1,0 +1,94 @@
+<include file='Public:header' />
+    <div id="main">
+        <div class="ad_position_id">
+            <yufu:advert settag="article_list_top" />
+        </div>
+        <div class="article_box">
+            <div class="article_left">
+                <div class="articlecategory">
+                    <span>筛选：</span><a href="{:U('Article/index',array('id'=>$position[0]['id']))}" <eq name="id" value="$position[0]['id']">class="cur"</eq>>所有</a>
+                    <volist name="categorylist" id="category1">
+                        <if condition="$category1['id'] eq $position[0]['id']">
+                        <volist name="category1.pid" id="category2">
+                            <a href="{:U('Article/index',array('id'=>$category2['id']))}" title="{$category2['catname']}" <eq name="id" value="$category2['id']">class="cur"</eq>>{$category2['catname']}</a>
+                        </volist>
+                        </if>
+                    </volist>
+                </div>
+                <volist name="list" id="vo">
+                    <div class="articlelist">
+                        <div class='title'>
+                            <a href="{:U('Article/show',array('id'=>$vo['id']))}" title="{$vo.title}{$vo.subtitle}" target="_blank">{$vo.title}<span class="red">{$vo.subtitle}</span></a>
+                        </div>
+                        <div class="info">
+                            <span class="category"><b>分类：</b><a href="{:U('Article/index',array('id'=>$vo['catid']))}" title="查看 {$vo.catid|getCategoryName} 全部文章" target="_blank">{$vo.catid|getCategoryName}</a></span>
+                            <span class="sj"><b>来源：</b>{$vo.mallid|getMallName}</span>
+                            <span class="keywods"><b>关键词：</b>{$vo.keywords}</span>
+                            <span class="time">{$vo.create_time|toDate="m-d H:i"}</span>
+                        </div>
+                        <div class="subcontent">
+                            <div class="img">
+                                <a href="{:U('Article/show',array('id'=>$vo['id']))}" title="{$vo.title}{$vo.subtitle}" target="_blank"><img src="__ROOT__/Uploads{$vo['thumb'][0]|str_replace='.jpg','_300x300.jpg',###}" /></a>
+                            </div>
+                            <div class='description'>
+                                <div class="price">
+                                    <div class="pricecontent">
+                                        原价：<del>{$vo.price}</del>元<br>
+                                        特价：<span>{$vo.hdprice}</span>元
+                                    </div>
+                                    <a href="{:U('Article/link',array('id'=>$vo['id']))}" target="_blank" class="pricelink"></a>
+                                </div>
+                                <div class="clear"></div>
+                                <div class="content">{$vo.content|strip_tags|msubstr=0,90}<a href="{:U('Article/show',array('id'=>$vo['id']))}" target="_blank">查看全文&gt;&gt;</a></div>
+                            </div>
+
+                        </div>
+                        <div class="clear"></div>
+                        <div class="commentinfo">
+                            <a href="javascript:return false;" onclick="zhi(this,{$vo.id},'chaozhi')" class="chaozhi">{$vo.chaozhi}</a><a href="javascript:return false;" onclick="zhi(this,{$vo.id},'yibanzhi')" class="yibanzhi">{$vo.yibanzhi}</a><a href="javascript:return false;" onclick="zhi(this,{$vo.id},'buzhi')" class="buzhi">{$vo.buzhi}</a>    
+                            <span class="jg"><b>{$vo.zongzhi}</b>&nbsp;位网友中的&nbsp;<b>{$vo.zhi}</b>&nbsp;位认为值得买！</span>
+                            <span class="fx"></span>
+                        </div>
+                    </div>
+
+                </volist>
+                <div class="page">{$page}</div>
+            </div>
+            <div class="article_right">
+                <div class="main_side">
+                    <h3>热门推荐<span></span></h3>
+                    <ul class="articlelist">
+                        <yufu:article catid="60" order="hits desc" num="20">
+                        <li><a href="{:U('Article/show',array('id'=>$article['id']))}" target="_blank">{$article.title|msubstr=0,15}</a></li>
+                        </yufu:article>
+                    </ul>
+                </div>
+            </div>
+            
+            
+        </div>
+</div>
+
+<script type="text/javascript">
+    function xh(cur,id){
+        $.get("{:U('Article/xh')}",{id:id},function(data){
+            $(cur).html("喜欢("+data+")");
+       }) ;
+    }
+    function zhi(cur,id,zt){
+        
+        $.get("{:U('Article/zhi')}",{id:id,zt:zt},function(data){
+            if(zt==="chaozhi"){
+                $(cur).html(data['chaozhi']); 
+            }else if(zt==="yibanzhi"){
+                $(cur).html(data['yibanzhi']); 
+            }
+            else if(zt==="buzhi"){
+                $(cur).html(data['buzhi']); 
+            }
+           $(cur).parent().children('.jg').html((Number(data['chaozhi'])+Number(data['yibanzhi'])+Number(data['buzhi']))+"&nbsp;位网友中的&nbsp;"+(Number(data['chaozhi'])+Number(data['yibanzhi']))+"&nbsp;位认为值得买！"); 
+       }) ;
+    }
+     
+</script>
+<include file='Public:footer' />

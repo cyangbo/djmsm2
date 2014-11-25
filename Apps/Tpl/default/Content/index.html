@@ -1,0 +1,18 @@
+<include file="Public:header"/>
+<div id="main">
+    <div class="conent_page">
+        <div class="position">
+            <span>当前位置：</span>
+            <a href="__APP__">首页</a> &gt; 
+            <volist name="position" id="vo">
+                <a href="{:U('Content/index',array('id'=>$vo['id']))}">{$vo.catname}</a>&nbsp;&gt;&nbsp;
+            </volist>
+        </div>
+        <div class="conent_box">
+            {$data.content}
+            扫描二维码，浏览手机网站：<br />
+            <yufu:other settag="appclient" />
+        </div>
+    </div>
+</div>
+<include file="Public:footer"/>

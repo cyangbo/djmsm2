@@ -1,0 +1,195 @@
+<include file="Public:header" />
+<div class="main">
+    <div class="box_tit">
+        <h2>系统设置</h2>
+    </div>
+    <div class="form_list zw">
+        <form method='post' id="form1" name="form1" action="{:U('Set/save')}"  enctype="multipart/form-data">
+        
+        <div class="form_list_top">
+        <dl>
+            <dt> 站点名称：</dt>
+            <dd>
+                <input type="text" class="ipt6" name="SITE_NAME" value="{$user_config.SITE_NAME}"><span class="red">*</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 站点域名：</dt>
+            <dd>
+                <input type="text" class="ipt6" name="DOMAIN_NAME" value="{$user_config.DOMAIN_NAME}"><span class="red">*</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 站点标题：</dt>
+            <dd>
+                <input type="text" class="ipt6" name="SITE_TITLE" value="{$user_config.SITE_TITLE}"><span class="fontcolor">站点首页title标签的设置</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 站点关键词：</dt>
+            <dd>
+                <input type="text" class="ipt6" name="SITE_KEYWORDS" value="{$user_config.SITE_KEYWORDS}"><span class="fontcolor">站点首页meta标签 keywords站点关键词的设置</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 站点描述：</dt>
+            <dd>
+                <textarea name="SITE_DESCRIPTION" style="width:400px; height:60px; padding-left: 3px;">{$user_config.SITE_DESCRIPTION}</textarea><span class="fontcolor">站点首页meta标签 description站点描述的设置</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 站点logo：</dt>
+            <dd class="img">
+                <notempty name="set.logo">
+                <img src="__ROOT__/Uploads/{$set.logo}" name="logo" />
+                <a href="javascript:return false;" onclick="foreverdelthumb(this);" title="你确定要删除logo吗？">删除logo</a>
+                <else/>
+                <input type="file" class="thumb" name="logo" />
+                </notempty>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 淘宝客API：</dt>
+            <dd>
+                <input type="checkbox" name="TAOKEAPI" <eq name="user_config.TAOKEAPI" value="1"> value="1" checked="checked"</eq>>&nbsp;开启<span class="fontcolor">开启前请先查看您是否符合调用API接口权限</span><span><a href="http://dev.open.taobao.com/bbs/read.php?tid=24566&qq-pf-to=pcqq.c2c" target="_blank">查看淘宝客调用API新规</a></span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 淘宝客appkey：</dt>
+            <dd>
+                <input type="text" class="ipt6" id="APPKEY" name="APPKEY" value="{$user_config.APPKEY}" <eq name="user_config.TAOKEAPI" value="0">style="background: #EBEBE4;"</eq>><span class="fontcolor">淘客API，要把商品链接自动转化为推广链接，这里必填</span><span><a href="http://open.taobao.com" target="_blank">淘宝开发平台</a></span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 淘宝客secret：</dt>
+            <dd>
+                <input type="text" class="ipt6" id="SECRET" name="SECRET" value="{$user_config.SECRET}" <eq name="user_config.TAOKEAPI" value="0">style="background: #EBEBE4;"</eq>><span class="fontcolor">淘客API，要把商品链接自动转化为推广链接，这里必填</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 附件大小限制：</dt>
+            <dd>
+                <input type="text" class="ipt2" name="subjoinmaxsize" value="{$set.subjoinmaxsize}"><span>KB</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 附件类型限制：</dt>
+            <dd>
+                <input type="text" class="ipt6" name="subjoinallowexts" value="{$set.subjoinallowexts}"><span class="fontcolor">多个用英文,间隔</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 图片自动缩放：</dt>
+            <dd>
+                <input type="radio" name="isthumb" value="1" <eq name="set.isthumb" value="1">checked="checked"</eq> />&nbsp;开启&nbsp;&nbsp;<input type="radio" name="isthumb" value="0" <eq name="set.isthumb" value="0">checked="checked"</eq> />&nbsp;关闭
+            </dd>
+        </dl>
+        <dl>
+            <dt> 缩略图最大宽度：</dt>
+            <dd>
+                <input type="text" class="ipt6" name="thumbMaxWidth" value="{$set.thumbMaxWidth}"><span class="fontcolor">多个用英文,间隔</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 缩略图最大高度：</dt>
+            <dd>
+                <input type="text" class="ipt6" name="thumbMaxHeight" value="{$set.thumbMaxHeight}"><span class="fontcolor">多个用英文,间隔</span>
+            </dd>
+        </dl>
+       
+        <dl>
+            <dt> 缩略图文件后缀：</dt>
+            <dd>
+                <input type="text" class="ipt6" name="thumbSuffix" value="{$set.thumbSuffix}"><span class="fontcolor">多个用英文,间隔</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 主题审核：</dt>
+            <dd>
+                <input type="radio" name="subject" value="1" <eq name="set.subject" value="1">checked="checked"</eq> />&nbsp;审核新主题&nbsp;&nbsp;<input type="radio" name="subject" value="0" <eq name="set.subject" value="0">checked="checked"</eq> />&nbsp;无需审核新主题
+            </dd>
+        </dl>
+        <dl>
+            <dt> 评论审核：</dt>
+            <dd>
+                <input type="radio" name="comment" value="1" <eq name="set.comment" value="1">checked="checked"</eq> />&nbsp;审核新评论&nbsp;&nbsp;<input type="radio" name="comment" value="0" <eq name="set.comment" value="0">checked="checked"</eq> />&nbsp;无需审核新评论
+            </dd>
+        </dl>
+        <dl>
+            <dt> 模板设置：</dt>
+            <dd>
+                <select name="DEFAULT_THEME">                                
+                    <volist name="templateList" id="vo">
+                        <option value="{$key}" {$key==$user_config['DEFAULT_THEME'] ? 'selected="selected"':''}>{$vo}</option>
+                    </volist>
+                </select>
+            </dd>
+        </dl>
+        <dl>
+            <dt> URL模式：</dt>
+            <dd>
+                <select name="URL_MODEL">
+                    <option value="0" {$user_config['URL_MODEL']==0 ? 'selected="selected"':''}>普通模式</option>
+                    <option value="1" {$user_config['URL_MODEL']==1 ? 'selected="selected"':''}>PATHINFO模式</option> 
+                    <option value="2" {$user_config['URL_MODEL']==2 ? 'selected="selected"':''}>REWRITE模式</option> 
+                </select>
+                <span><a href="http://www.yufu5.com/index.php?m=article&a=show&id=15" target="_blank">如何设置请查看帮助</a></span>
+            </dd>
+            
+        </dl>
+        <dl>
+            <dt> 后台最大登录失败次数：</dt>
+            <dd>
+                <input type="text" class="ipt2" name="errorcount" value="{$set.errorcount}"><span class="fontcolor">后台最大登录失败次数</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 后台登录失败超次后间隔：</dt>
+            <dd>
+                <input type="text" class="ipt2" name="errorinterval" value="{$set.errorinterval}"><span class="fontcolor">后台登录超过设置的最大失败超次后需要等待间隔（秒）</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 留言间隔：</dt>
+            <dd>
+                <input type="text" class="ipt2" name="messageinterval" value="{$set.messageinterval}"><span class="fontcolor">用户留言间隔（秒）</span>
+            </dd>
+        </dl>
+        </div>
+        <div class="form_b">
+            <input type="hidden" name="id" value="{$set.id}">
+            <input type="submit" class="submit btn7" id="submit" value="提 交">
+        </div>
+        </form>
+    </div>
+
+
+</div>
+<script type="text/javascript">
+   $(function(){
+      $('input[name=TAOKEAPI]').click(function(){
+        
+        if($(this).attr("checked")==="checked"){
+                $('#APPKEY').css('background','');
+                $('#SECRET').css('background','');
+            }else{
+                $('#APPKEY').css('background','#EBEBE4');
+                $('#SECRET').css('background','#EBEBE4');
+            }
+        }); 
+   });
+   function foreverdelthumb(cur){
+       var nodename=$(cur).prev().attr('name');
+       var url="{:U('Set/delfile',array('id'=>$set['id'],'file'=>'"+nodename+"'))}";
+        //创建删除节点
+        $.get(url,function(){
+            //插入新节点
+            var html='<dd>\r\n<input type="file" class="thumb" name="'+nodename+'" />\r\n</dd>';
+            $(cur).parent().after(html);
+
+            //移除当前节点
+            $(cur).parent().remove();
+        });
+    }
+</script>
+<include file="Public:footer" />

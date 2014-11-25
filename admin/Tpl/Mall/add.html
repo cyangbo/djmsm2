@@ -1,0 +1,98 @@
+<include file="Public:header" />
+<div class="main">
+    <div class="box_tit">
+        <h2>添加商家</h2>
+    </div>
+    <div class="form_list">
+        <form method='post' id="form1" name="form1" action="{:U('Mall/insert')}"  enctype="multipart/form-data">
+        <div class="listtop">
+        <dl>
+            <dt> 选择分组：</dt>
+            <dd>
+                <select name="catid">
+                    <volist name="grouplist" id="vo1">
+                        <option value="{$vo1['id']}">{$vo1['groupname']}</option>
+                    </volist>
+                </select>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 商家名称：</dt>
+            <dd>
+                <input type="text" class="ipt6" name="mallname"><span class="red">*</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 缩略图：</dt>
+            <dd>
+                <input name="thumb" class="thumb" type="file" />
+            </dd>
+        </dl>
+        <dl>
+            <dt> 商家网址：</dt>
+            <dd>
+                <input type="text" class="ipt8" name="mallurl" id="mallurl" value=""><span class="red">*</span><span class="huise">输入链接地址,一般以http://或https://打头</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 推广链接：</dt>
+            <dd>
+                <input type="text" class="ipt8" name="buyurl" value=""><span class="huise">输入链接地址,一般以http://或https://打头</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 排序值：</dt>
+            <dd>
+                <input type="text" class="ipt1" name="listorder" value="0" />
+            </dd>
+        </dl>
+        <dl>
+            <dt> 状态：</dt>
+            <dd>
+                <select name="status">
+                    <option value="1">启用</option>
+                    <option value="0">禁用</option>
+                </select>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 标题：</dt>
+            <dd>
+                <input type="text" class="ipt6" name="title"><span class="fontcolor">网页title标签设置。不填写，则默认为商家名称</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 关键字：</dt>
+            <dd>
+                <input type="text" class="ipt5" name="keyword"><span class="fontcolor">网页meta标签keywords关键词设置,利于搜索</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 摘要：</dt>
+            <dd>
+                <textarea name="description" id="description"></textarea><span class="fontcolor">网页meta标签description描述设置</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 商家介绍：</dt>
+        </dl>
+        </div>
+        <div class="listbottom">
+
+                <textarea name="content" id="myEditor"></textarea>
+                <script type="text/javascript">
+                    var editor = new UE.ui.Editor();
+                    editor.render("myEditor");
+                    //1.2.4以后可以使用一下代码实例化编辑器
+                    //UE.getEditor('myEditor')
+                </script>
+         </div>
+
+        <div class="form_b">
+            <input type="submit" class="submit btn7" id="submit" value="提 交">
+        </div>
+        </form>
+    </div>
+</div>
+
+<include file="Public:footer" />

@@ -1,0 +1,66 @@
+<include file="Public:header" />
+<script type="text/javascript">
+    $(function(){
+       $("#form1").ajaxForm({
+            success:  complete, 
+            dataType: 'json'
+        });
+
+        function complete(data){
+            alert(data.info);
+        }
+    });
+</script>
+<div class="memberbox">
+    <div class="memberbox_inner">
+
+        <div class="memberbox_left">
+            <include file="Member:left" />
+        </div>
+        <div class="memberbox_main">
+            <div class="member_nav">修改资料</div>
+            <form method='post' id="form1" name="form1" action="{:U('Member/checkInformation')}"  enctype="multipart/form-data">
+                <table border="0" cellspacing="6" cellpadding="3">
+                    <tbody>
+                        <tr>
+                            <th>头像：</th>
+                            <td>
+                                <notempty name="udata.thumb">
+                                <img src="__ROOT__/Uploads/{$udata.thumb}" width="80" height="80" />
+                                <a href="{:U('Member/delfile',array('id'=>$udata['id'],'file'=>'thumb'))}" title="你确定要删除头像吗？">删除头像</a>
+                                <else/>
+                                <input type="file" class="thumb" name="thumb" />
+                                </notempty>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>昵称：</th>
+                            <td><input type="text" class="ipt3" name="nickname" value="{$udata.nickname}" /></td>
+                        </tr>
+                     
+                        <tr>
+                            <th>电子邮箱：</th>
+                            <td><input type="text" class="ipt6" name="email" value="{$udata.email}" /></td>
+                        </tr>
+                        <tr>
+                            <th>个性签名：</th>
+                            <td>
+                                <textarea name="sign" style="width: 400px; height: 60px;">{$udata.sign}</textarea>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th></th>
+                            <td>
+                                <input type="hidden" name="id" value="{$udata.id}">
+                                <input type="submit" class="submit btn7" id="submit" value="修 改">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </form>
+        </div>
+    </div>
+</div>
+<div class="clear10"></div>
+<include file="Public:footer" />

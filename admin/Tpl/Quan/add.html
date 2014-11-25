@@ -1,0 +1,156 @@
+<include file="Public:header" />
+<link rel="stylesheet" type="text/css" href="../Public/js/calendar/jscal2.css"/>
+<link rel="stylesheet" type="text/css" href="../Public/js/calendar/border-radius.css"/>
+<link rel="stylesheet" type="text/css" href="../Public/js/calendar/win2k.css"/>
+<script type="text/javascript" src="../Public/js/calendar/calendar.js"></script>
+<script type="text/javascript" src="../Public/js/calendar/lang/en.js"></script>
+<div class="main">
+    <div class="box_tit">
+        <h2>添加优惠券</h2>
+    </div>
+    <div class="form_list">
+        <form method='post' id="form1" name="form1" action="{:U('Quan/insert')}"  enctype="multipart/form-data">
+        <div class="listtop">
+        <dl>
+            <dt> 栏目：</dt>
+            <dd>
+                <label class="label">{$catid|getCategoryName}</label><input type="hidden" name="catid" value="{$catid}">
+            </dd>
+        </dl>
+        <dl>
+            <dt> 选择商家：</dt>
+            <dd>
+                <select name="mallid">
+                    <volist name="malllist" id="vo1">
+                        <option value="{$vo1['id']}">{$vo1['mallname']}</option>
+                    </volist>
+                </select>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 标题：</dt>
+            <dd>
+                <input type="text" class="ipt8" name="title"><span class="red">*</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>自定义title：</dt>
+            <dd>
+                <input type="text" class="ipt8" name="sitetitle"><span class="fontcolor">如果title为空，默认用标题作为title内容</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>keywords：</dt>
+            <dd>
+                <input type="text" class="ipt5" name="keywords"><span class="fontcolor">网页Meta标签的keywords关键词处显示,此处会显示在商品页的本商品页面!</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt>description：</dt>
+            <dd>
+                <textarea name="description" class="fLeft"></textarea><span class="fontcolor" style="float: left; width: 200px;">网页Meta标签的description处显示,此处会显示在商品页的本商品页面!</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 优惠说明：</dt>
+            <dd>
+                <input type="text" class="ipt6" name="quanprice">
+            </dd>
+        </dl>
+        
+        <dl>
+            <dt> 总数量：</dt>
+            <dd>
+                <input type="text" class="ipt3" name="countnum" value="0">
+            </dd>
+        </dl>
+        <dl>
+            <dt> 领取数量：</dt>
+            <dd>
+                <input type="text" class="ipt3" name="salenum" value="0">
+            </dd>
+        </dl>
+        <dl>
+            <dt> 开始时间：</dt>
+            <dd>
+                
+                <input type="text" class="ipt4" name="starttime" id="starttime">
+                <script type="text/javascript">
+                    Calendar.setup({
+                        weekNumbers: true,
+                        inputField : "starttime",
+                        trigger    : "starttime",
+                        dateFormat: "%Y-%m-%d %H:%M:%S",
+                        showTime: true,
+                        minuteStep: 1,
+                        onSelect   : function() {this.hide();}
+                    });
+                </script>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 结束时间：</dt>
+            <dd>
+                <input type="text" class="ipt4" name="endtime" id="endtime">
+                <script type="text/javascript">
+                    Calendar.setup({
+                        weekNumbers: true,
+                        inputField : "endtime",
+                        trigger    : "endtime",
+                        dateFormat: "%Y-%m-%d %H:%M:%S",
+                        showTime: true,
+                        minuteStep: 1,
+                        onSelect   : function() {this.hide();}
+                    });
+
+                </script>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 排序值：</dt>
+            <dd>
+                <input type="text" class="ipt1" name="listorder" value="0" />
+            </dd>
+        </dl>
+        <dl>
+            <dt> 状态：</dt>
+            <dd>
+                <select name="status">
+                    <option value="1">启用</option>
+                    <option value="0">禁用</option>
+                </select>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 优惠券链接：</dt>
+            <dd>
+                <input type="text" class="ipt8" name="buyurl"><span class="red">*</span>
+            </dd>
+        </dl>
+        <dl>
+            <dt> 缩略图：</dt>
+            <dd>
+                <input name="thumb" class="thumb" type="file" />
+            </dd>
+        </dl>
+        <div style='font-size: 14px; padding-top: 15px; color: #666;'>详细介绍：</div>   
+        </div>
+        <div class="listbottom">
+
+                <textarea name="content" id="myEditor"></textarea>
+                <script type="text/javascript">
+                    var editor = new UE.ui.Editor();
+                    editor.render("myEditor");
+                    //1.2.4以后可以使用一下代码实例化编辑器
+                    //UE.getEditor('myEditor')
+                </script>
+         </div>
+
+        <div class="form_b">
+            <input type="submit" class="submit btn7" id="submit" value="提 交">
+        </div>
+        </form>
+    </div>
+</div>
+
+<include file="Public:footer" />
