@@ -1,0 +1,1 @@
+<?php	return array ( 0 => 'id', 1 => 'groupname', 2 => 'remark', 3 => 'listorder', 4 => 'status', 5 => 'create_time', '_autoinc' => true, '_pk' => 'id', '_type' => array ( 'id' => 'smallint(6) unsigned', 'groupname' => 'varchar(20)', 'remark' => 'varchar(255)', 'listorder' => 'int(11) unsigned', 'status' => 'tinyint(1)', 'create_time' => 'int(11) unsigned', ), );?>
